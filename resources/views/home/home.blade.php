@@ -13,7 +13,7 @@
 <body class="bg-white">
     <nav class="w-full h-14 flex flex-row justify-between px-14 max-[768px]:px-4 mb-4">
         <div class="logo flex justify-between items-center">
-            <h1 class="text-2xl text-center font-black text-pink-500">Gadget<span class="text-slate-700">pedia</span></h1>
+            <h1 class="text-2xl text-center font-bold text-pink-500">Gadget<span class="text-slate-700">pedia</span></h1>
         </div>
         <div class="menu flex justify-between items-center">
             <a href="/login" class="bg-pink-500 px-4 pt-1 pb-2 text-white rounded-full hover:bg-pink-600">Login</a>

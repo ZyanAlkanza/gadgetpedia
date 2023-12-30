@@ -16,7 +16,7 @@
 <body class="flex overflow-hidden">
     <section class="sidebar h-screen w-[180px] max-[768px]:w-[60px] shadow-2xl">
         <div class="logo">
-            <h1 class="text-xl max-[768px]:text-4xl font-bold text-pink-500 text-center lg:mt-2">G<span class="max-[768px]:hidden">adgetpedia</span></h1>
+            <h1 class="text-xl max-[768px]:text-4xl font-bold text-pink-500 text-center lg:mt-2">G<span class="max-[768px]:hidden">adget<span class="text-gray-700">pedia</span></span></h1>
         </div>
 
         <div class="menu h-full">
