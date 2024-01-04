@@ -22,12 +22,12 @@
         <table class="w-full text-sm text-left rtl:text-right text-black-500">
             <thead class="text-xs text-black uppercase bg-white">
                 <tr>
-                    <th scope="col" class="px-6 py-3 w-10">No</th>
-                    <th scope="col" class="px-6 py-3 w-40 ">Brand</th>
-                    <th scope="col" class="px-6 py-3 w-60 ">Model</th>
-                    <th scope="col" class="px-6 py-3 w-20 ">Stock</th>
-                    <th scope="col" class="px-6 py-3 w-40 ">Price</th>
-                    <th scope="col" class="px-6 py-3 w-40  text-center">Action</th>
+                    <th scope="col" class="px-6 py-3 w-[5%] text-center">No</th>
+                    <th scope="col" class="px-6 py-3 w-[20%]">Brand</th>
+                    <th scope="col" class="px-6 py-3 w-[20%]">Model</th>
+                    <th scope="col" class="px-6 py-3 w-[15%]">Stock</th>
+                    <th scope="col" class="px-6 py-3 w-[20%]">Price</th>
+                    <th scope="col" class="px-6 py-3 w-[20%] text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
