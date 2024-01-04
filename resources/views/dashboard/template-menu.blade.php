@@ -7,7 +7,7 @@
         <ul class="flex flex-col h-full lg:pl-4">
             <a href="/dashboard"><li class="max-[768px]:text-2xl max-[768px]:text-center py-4 mt-8 hover:text-pink-500"><i class="fi fi-rr-dashboard "></i><span class="max-[768px]:hidden ml-3">Dashboard</span></li></a>
             <a href="/user"><li class="max-[768px]:text-2xl max-[768px]:text-center py-4 hover:text-pink-500"><i class="fi fi-rr-users "></i><span class="max-[768px]:hidden ml-3">User</span></li></a>
-            <a href=""><li class="max-[768px]:text-2xl max-[768px]:text-center py-4 hover:text-pink-500"><i class="fi fi-rr-boxes "></i><span class="max-[768px]:hidden ml-3">Product</span></li></a>
+            <a href="/phone"><li class="max-[768px]:text-2xl max-[768px]:text-center py-4 hover:text-pink-500"><i class="fi fi-rr-mobile-button"></i><span class="max-[768px]:hidden ml-3">Phone</span></li></a>
             <a href=""><li class="max-[768px]:text-2xl max-[768px]:text-center py-4 hover:text-pink-500"><i class="fi fi-rr-cart-shopping-fast "></i><span class="max-[768px]:hidden ml-3">Order</span></li></a>
             
             <div class="flex-grow"></div>
