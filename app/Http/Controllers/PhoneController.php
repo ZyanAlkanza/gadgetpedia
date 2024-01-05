@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Phone;
 use Illuminate\Http\Request;
 
 class PhoneController extends Controller
@@ -11,7 +12,8 @@ class PhoneController extends Controller
      */
     public function index()
     {
-        return view('dashboard.phone');
+        $phone = Phone::paginate(5);
+        return view('dashboard.phone', compact('phone'));
     }
 
     /**
