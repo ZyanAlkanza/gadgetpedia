@@ -29,17 +29,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-b">
-                        <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap text-center">1</th>
-                        <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">Zyan Alkanza</th>
-                        <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">zyan.mujaddid@gmail.com</th>
-                        <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap flex justify-center gap-2">
-                            <a href="{{ url('user/{id}/edit') }}"  class="border-2 border-pink-500 bg-pink-500 px-4 py-2 text-white hover:bg-pink-600 rounded-full">Edit</a>
-                            <a href="" class="border-2 border-pink-500 px-4 py-2 text-pink-500 rounded-full hover:bg-pink-600 hover:text-white">Delete</a>
-                        </th>
-                    </tr>
+
+                    @foreach ($user as $key => $item)
+                        <tr class="bg-white border-b">
+                            <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap text-center">{{ $user->firstItem()+$key }}</th>
+                            <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap">{{ $item->username }}</th>
+                            <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap">{{ $item->email }}</th>
+                            <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap flex justify-center gap-2">
+                                <a href="{{ url('user/{id}/edit') }}"  class="border-2 border-pink-500 bg-pink-500 px-4 py-2 text-white hover:bg-pink-600 rounded-full">Edit</a>
+                                <a href="" class="border-2 border-pink-500 px-4 py-2 text-pink-500 rounded-full hover:bg-pink-600 hover:text-white">Delete</a>
+                            </th>
+                        </tr>
+                    @endforeach
+                    
                 </tbody>
             </table>
+        </div>
+
+        <div class="pagination px-8 mt-4">
+            {{ $user->links() }}
         </div>
 
     </section>
