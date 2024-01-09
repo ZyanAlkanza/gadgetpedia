@@ -6,7 +6,22 @@
 
 @section('content')
     <section class="content w-full overflow-hidden">
-        <div class="title text-xl font-bold mt-2 ml-2">User</div>
+        <div class="title text-xl font-bold mt-2 ml-8 flex justify-between h-[35px]">
+            <div class="title">
+                User
+            </div>
+
+            <div class="status mr-8">
+                @if (session('status'))
+                <div id="alert" class="bg-pink-500 text-white px-4 py-1 rounded-full flex items-center justify-between">
+                    <div class="flex items-center">
+                        <span class="text-sm font-semibold">{{ session('status') }}</span>
+                    </div>
+                    <button id="closeBtn" class="ml-8 font-normal">&times;</button>
+                </div>
+                @endif
+            </div>
+        </div>
 
         <div class="accessibility max-[768px]:h-24 mt-8 flex max-[768px]:flex-col px-8">
             <div class="searchbar max-[768px]:w-full w-1/2">
@@ -46,9 +61,23 @@
             </table>
         </div>
 
-        <div class="pagination px-8 mt-4">
+        <div class="pagination px-8 mt-8">
             {{ $user->links() }}
         </div>
 
     </section>
+
+    <script>
+        function closeAlert() {
+        document.getElementById('alert').style.display = 'none';
+        }
+
+        document.getElementById('closeBtn').addEventListener('click', function () {
+            closeAlert();
+        });
+
+        setTimeout(function () {
+            closeAlert();
+        }, 5000);
+    </script>
 @endsection
