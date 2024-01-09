@@ -20,6 +20,11 @@ class User extends Authenticatable
 
     protected $guarded =['id'];
 
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
+
     // protected $fillable = [
     //     'name',
     //     'email',

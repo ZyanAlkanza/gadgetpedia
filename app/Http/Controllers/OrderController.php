@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\Orderdetail;
+use App\Models\Phone;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -11,7 +14,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('dashboard.order');
+        $order = Order::with('user', 'orderdetails')->get();
+
+        return view('dashboard.order', compact('order'));
     }
 
     /**
@@ -35,7 +40,10 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $order = order::with('user')->findOrFail($id);
+        $orderdetail = orderdetail::with('phone')->findOrFail($id);
+
+        return view('dashboard.order-detail', compact('order', 'orderdetail'));
     }
 
     /**
@@ -43,7 +51,9 @@ class OrderController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $order = order::findOrFail($id);
+
+        return view('dashboard.order-edit', compact('order'));
     }
 
     /**
