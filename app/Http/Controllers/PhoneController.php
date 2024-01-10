@@ -34,7 +34,22 @@ class PhoneController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'brand' => 'required',
+            'model' => 'required',
+            'price' => 'required',
+            'stock' => 'required'
+        ]);
+
+        $request = Phone::create([
+            'brand' => $request->brand,
+            'model' => $request->model,
+            'price' => $request->price,
+            'stock' => $request->stock,
+            'desc' => $request->desc
+        ]);
+
+        return redirect('phone')->with('status', 'Data Added Successfully');
     }
 
     /**
