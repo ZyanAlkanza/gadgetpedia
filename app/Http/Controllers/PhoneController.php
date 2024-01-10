@@ -13,7 +13,7 @@ class PhoneController extends Controller
     public function index()
     {
         $phone = Phone::paginate(5);
-        return view('dashboard.phone', compact('phone'));
+        return view('dashboard.phone', compact('phone'))->with('title', 'Phone');
     }
 
     /**
@@ -21,7 +21,7 @@ class PhoneController extends Controller
      */
     public function create()
     {
-        return view('dashboard.phone-create');
+        return view('dashboard.phone-create')->with('title', 'Add Phone');
     }
 
     /**
@@ -37,7 +37,7 @@ class PhoneController extends Controller
      */
     public function show(string $id)
     {
-        return view('dashboard.phone-detail');
+        return view('dashboard.phone-detail')->with('title', 'Phone Detail');
     }
 
     /**

@@ -16,7 +16,7 @@ class OrderController extends Controller
     {
         $order = Order::with('user', 'orderdetails')->get();
 
-        return view('dashboard.order', compact('order'));
+        return view('dashboard.order', compact('order'))->with('title', 'Order');
     }
 
     /**
@@ -24,7 +24,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view('dashboard.order-create');
+        return view('dashboard.order-create')->with('title', 'Add Order');
     }
 
     /**
@@ -43,7 +43,7 @@ class OrderController extends Controller
         $order = order::with('user')->findOrFail($id);
         $orderdetail = orderdetail::with('phone')->findOrFail($id);
 
-        return view('dashboard.order-detail', compact('order', 'orderdetail'));
+        return view('dashboard.order-detail', compact('order', 'orderdetail'))->with('title', 'Detail Order');
     }
 
     /**
@@ -53,7 +53,7 @@ class OrderController extends Controller
     {
         $order = order::findOrFail($id);
 
-        return view('dashboard.order-edit', compact('order'));
+        return view('dashboard.order-edit', compact('order'))->with('title', 'Edit Order');
     }
 
     /**

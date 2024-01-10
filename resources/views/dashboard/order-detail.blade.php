@@ -1,8 +1,4 @@
-@extends('dashboard.template-header')
-
-@section('title')
-    Detail Order
-@endsection
+@include('dashboard.template-header')
 
 <body class="flex py-14 px-60 max-[768px]:py-4 max-[768px]:px-2 h-full max-[768px]:h-max">
 

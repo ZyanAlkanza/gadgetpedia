@@ -13,8 +13,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::paginate(8);
-        return view("dashboard.user", compact('user'));
+        // $user = User::paginate(8);
+
+        $user = User::where('role', 2)->paginate(8);
+        return view("dashboard.user", compact('user'))->with('title', 'User');
     }
 
     /**
@@ -22,7 +24,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view("dashboard.user-create");
+        return view("dashboard.user-create")->with('title', 'Add User');
     }
 
     /**
@@ -65,7 +67,8 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::findorfail($id);
+        return view('dashboard.user-edit', compact('user'))->with('title', 'Edit User');
     }
 
     /**
@@ -73,7 +76,22 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'username' => 'required',
+            'email' => 'required',
+        ],
+        [
+            'username.required' => 'Username is required',
+            'email.required' => 'Email is required'
+        ]);
+
+        $request = User::where('id', $id)->update([
+            'username' => $request->username,
+            'email' => $request->email,
+        ]);
+
+        return redirect('user')->with('status', 'Data berhasil diupdate');
+
     }
 
     /**

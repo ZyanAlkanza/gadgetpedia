@@ -1,9 +1,5 @@
 @extends('dashboard.template')
 
-@section('title')
-    Dashboard
-@endsection
-
 @section('content')
     <section class="content w-full">
         <div class="title text-xl font-bold mt-2 ml-2">Dashboard</div>

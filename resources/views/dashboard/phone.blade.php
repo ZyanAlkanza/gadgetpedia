@@ -1,9 +1,5 @@
 @extends('dashboard.template')
 
-@section('title')
-    Phone
-@endsection
-
 @section('content')
 <section class="content w-full overflow-hidden">
     <div class="title text-xl font-bold mt-2 ml-2">Phone</div>

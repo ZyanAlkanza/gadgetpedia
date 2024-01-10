@@ -9,5 +9,5 @@
     {{-- Tailwind --}}
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <title>@yield('title')</title>
+    <title>{{ $title }}</title>
 </head>
