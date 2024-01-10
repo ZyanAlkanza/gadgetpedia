@@ -51,7 +51,7 @@ class UserController extends Controller
             'role' => $request->role,
         ]);
 
-        return redirect('user')->with('status', 'Data berhasil ditambahkan');
+        return redirect('user')->with('status', 'Data Added Successfully');
     }
 
     /**
@@ -90,7 +90,7 @@ class UserController extends Controller
             'email' => $request->email,
         ]);
 
-        return redirect('user')->with('status', 'Data berhasil diupdate');
+        return redirect('user')->with('status', 'Data Updated Successfully');
 
     }
 
@@ -99,6 +99,10 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::findorfail($id);
+
+        $user->delete();
+
+        return redirect('user')->with('status', 'Data Deleted Successfully');
     }
 }
