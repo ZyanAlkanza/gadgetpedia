@@ -10,9 +10,14 @@ class PhoneController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $phone = Phone::paginate(5);
+        if($request->has('search')){
+            $phone = Phone::where('model', 'LIKE', '%'.$request->search.'%')->orWhere('brand', 'LIKE', '%'.$request->search.'%')->paginate(8);
+        }else{
+            $phone = Phone::paginate(8);
+        }
+
         return view('dashboard.phone', compact('phone'))->with('title', 'Phone');
     }
 
