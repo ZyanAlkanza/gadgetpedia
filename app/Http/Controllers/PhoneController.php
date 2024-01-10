@@ -57,7 +57,9 @@ class PhoneController extends Controller
      */
     public function show(string $id)
     {
-        return view('dashboard.phone-detail')->with('title', 'Phone Detail');
+        $phone = Phone::findorfail($id);
+        
+        return view('dashboard.phone-detail', compact('phone'))->with('title', 'Phone Detail');
     }
 
     /**

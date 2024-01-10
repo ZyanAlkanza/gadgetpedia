@@ -26,7 +26,7 @@
                 </form>
             </div>
             <div class="buttongroup max-[768px]:w-full w-1/2 flex justify-end max-[768px]:mt-2">
-                <a href="/phone/create" class="add border-2 bg-pink-500 px-4  py-2 text-sm rounded-full text-white hover:bg-pink-600 text-lg">Add</a>
+                <a href="{{ url('/phone/create') }}" class="add border-2 bg-pink-500 px-4  py-2 text-sm rounded-full text-white hover:bg-pink-600 text-lg">Add</a>
                 <a href="" class="recycle border-2 border-pink-500 px-4  py-2 text-sm rounded-full text-pink-500 hover:bg-pink-600 hover:text-white text-lg ml-2">Recycle</a>
             </div>
         </div>
@@ -53,7 +53,7 @@
                             <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap text-right">{{ $item->stock }} Pcs</th>
                             <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap text-right">Rp. {{ number_format($item->price, 0, ',', '.'); }}</th>
                             <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap flex justify-center gap-2">
-                                <a href="{{ url('phone/{id}') }}"  class="border-2 border-pink-500 bg-pink-500 px-4 py-2 text-white hover:bg-pink-600 rounded-full">Detail</a>
+                                <a href="{{ url('phone/'.$item->id) }}"  class="border-2 border-pink-500 bg-pink-500 px-4 py-2 text-white hover:bg-pink-600 rounded-full">Detail</a>
                                 <a href="{{ url('phone/{id}/edit') }}"  class="border-2 border-pink-500 px-4 py-2 text-pink-500 hover:bg-pink-600 hover:text-white rounded-full">Edit</a>
                                 <a href="" class="border-2 border-pink-500 px-4 py-2 text-pink-500 rounded-full hover:bg-pink-600 hover:text-white">Delete</a>
                             </th>
