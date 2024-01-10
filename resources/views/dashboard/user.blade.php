@@ -49,13 +49,38 @@
                             <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap flex justify-center gap-2">
                                 <a href="{{ url('user/'.$item->id.'/edit') }}"  class="border-2 border-pink-500 bg-pink-500 px-4 py-2 text-white hover:bg-pink-600 rounded-full">Edit</a>
                                 
-                                <form action="{{ url('user/'. $item->id) }}" method="post" onsubmit="return confirm('Are you sure delete this data..?')">
+                                {{-- <form action="{{ url('user/'. $item->id) }}" method="post" onsubmit="return confirm('Are you sure delete this data..?')">
                                     @method('DELETE')
                                     @csrf
                                     <button type="submit" class="border-2 border-pink-500 px-4 py-2 text-pink-500 rounded-full hover:bg-pink-600 hover:text-white">Delete</button>
-                                </form>
+                                </form> --}}
                                 
+                                <div x-data="{ showModal: false, itemId: null }">
+                                    <!-- Tombol Hapus -->
+                                    <button @click="showModal = true" class="border-2 border-pink-500 px-4 py-2 text-pink-500 rounded-full hover:bg-pink-600 hover:text-white">Hapus</button>
                                 
+                                    <!-- Modal Konfirmasi Hapus -->
+                                    <div x-show="showModal" class="fixed inset-0 z-50 overflow-auto bg-black bg-opacity-50 flex items-center justify-center">
+                                        <div class="bg-white p-8 w-[500px] mx-auto rounded shadow-lg">
+                                            <p class="text-xl font-semibold mb-4 text-center text-pink-500">DELETE DATA</p>
+                                            <p class="text-center">Are you sure delete this user data?</p>
+                                
+                                            <!-- Tombol Konfirmasi Hapus -->
+                                            <div class="mt-6 flex justify-center gap-4">
+
+                                                <form action="{{ url('user/'. $item->id) }}" method="post">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button type="submit" class="border-2 border-pink-500 px-4 py-2 text-pink-500 rounded-full hover:bg-pink-600 hover:text-white">Delete</button>
+                                                </form>
+
+                                                <button @click="showModal = false" class="border-2 border-pink-500 bg-pink-500 px-4 py-2 text-white hover:bg-pink-600 rounded-full">Batal</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+
                             </th>
                         </tr>
                     @endforeach
@@ -84,4 +109,20 @@
             closeAlert();
         }, 5000);
     </script>
+
+    <script>
+        window.showDeleteModal = function(itemId) {
+            window.itemId = itemId;
+            window.showModal = true;
+        }
+
+        window.deleteItem = function() {
+            // Tambahkan logika penghapusan di sini, misalnya menggunakan AJAX atau form submission
+            // console.log('Item ID yang akan dihapus:', window.itemId);
+
+            // Tutup modal setelah penghapusan
+            window.showModal = false;
+        }
+    </script>
+
 @endsection

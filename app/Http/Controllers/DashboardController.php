@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\Orderdetail;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -11,7 +14,17 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard.index')->with('title', 'Dashboard');
+        // $order = Order::with('user','orderdetails', 'orderdetails.phone')->get();
+
+        $user = DB::table('users')->select(DB::raw('count(*) as total_user'))->where('role', 2)->where('deleted_at', null)->get();
+        $product = DB::table(('phones'))->select(DB::raw('count(*) as total_product'))->get();
+        $outofstock = DB::table(('phones'))->select(DB::raw('count(*) as total_outofstock'))->where('stock',0)->get();
+        $order = DB::table('orders')->select(DB::raw('count(*) as total_order'))->get();
+
+        // return $outofstock;
+        
+
+        return view('dashboard.index', compact('user','product','outofstock','order'))->with('title', 'Dashboard');
     }
 
     /**
