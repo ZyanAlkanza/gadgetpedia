@@ -11,11 +11,16 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         // $user = User::paginate(8);
+        if($request->has('search')){
+            $user = User::where('username', 'LIKE', '%'.$request->search.'%')->where('role', 2)->paginate(8);
+        }else{
+            $user = User::where('role', 2)->paginate(8);
+        }
 
-        $user = User::where('role', 2)->paginate(8);
+       
         return view("dashboard.user", compact('user'))->with('title', 'User');
     }
 
