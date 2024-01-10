@@ -105,4 +105,33 @@ class UserController extends Controller
 
         return redirect('user')->with('status', 'Data Deleted Successfully');
     }
+
+    public function trash()
+    {   
+        $user = User::onlyTrashed()->paginate(8);
+
+        return view('dashboard.user-trash', compact('user'))->with('title', 'Trash');
+    }
+
+    public function restore($id = null)
+    {
+        if($id !== null){
+            $user = User::onlyTrashed()->where('id', $id)->restore();
+        }else{
+            $user = User::onlyTrashed()->restore();
+        }
+
+        return redirect('user/trash')->with('status', 'Data Restored Successfully');
+    } 
+
+    public function deletepermanently($id = null)
+    {
+        if($id !== null){
+            $user = User::onlyTrashed()->where('id', $id)->forceDelete();
+        }else{
+            $user = User::onlyTrashed()->forceDelete();
+        }
+
+        return redirect('user/trash')->with('status', 'Data Permanently Deleted Successfully');
+    }
 }

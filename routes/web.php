@@ -21,6 +21,9 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+Route::get('/user/trash', [UserController::class, 'trash']);
+Route::get('user/restore/{id?}',[UserController::class, 'restore']);
+Route::get('user/deletepermanently/{id?}', [UserController::class, 'deletepermanently']);
 
 Route::resource('/', HomeController::class);
 Route::resource('/dashboard', DashboardController::class);
