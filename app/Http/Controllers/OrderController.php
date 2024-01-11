@@ -12,9 +12,15 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $order = Order::with('user', 'orderdetails')->get();
+    public function index(Request $request)
+    {   
+        if($request->has('search')){
+            $order = Order::whereHas('user', function($query) use ($request) {
+                $query->where('username', 'LIKE', '%' . $request->search . '%');
+            })->with('user')->get();
+        }else{
+            $order = Order::with('user', 'orderdetails')->get();
+        }
 
         return view('dashboard.order', compact('order'))->with('title', 'Order');
     }

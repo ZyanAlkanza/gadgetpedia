@@ -2,11 +2,28 @@
 
 @section('content')
     <section class="content w-full overflow-hidden">
-        <div class="title text-xl font-bold mt-2 ml-2">Order</div>
+        <div class="title text-xl font-bold mt-2 ml-8 flex justify-between h-[35px]">
+            <div class="title">
+                Order
+            </div>
+
+            <div class="status mr-8">
+                @if (session('status'))
+                <div id="alert" class="bg-pink-500 text-white px-4 py-1 rounded-full flex items-center justify-between">
+                    <div class="flex items-center">
+                        <span class="text-sm font-semibold">{{ session('status') }}</span>
+                    </div>
+                    <button id="closeBtn" class="ml-8 font-normal">&times;</button>
+                </div>
+                @endif
+            </div>
+        </div>
 
         <div class="accessibility max-[768px]:h-24 mt-8 flex max-[768px]:flex-col px-8">
             <div class="searchbar max-[768px]:w-full w-1/2">
-                <input type="text" placeholder="Search..." class="max-[768px]:w-full rounded-full px-4 py-2 focus:outline-none border-2 focus:border-pink-500">
+                <form action="{{ url('order') }}" method="get">
+                    <input type="text" name="search" id="search" placeholder="Search..." class="max-[768px]:w-full rounded-full px-4 py-2 focus:outline-none border-2 focus:border-pink-500">
+                </form>
             </div>
             <div class="buttongroup max-[768px]:w-full w-1/2 flex justify-end max-[768px]:mt-2">
                 <a href="/order/create" class="add border-2 bg-pink-500 px-4  py-2 text-sm rounded-full text-white hover:bg-pink-600 text-lg">Add</a>
