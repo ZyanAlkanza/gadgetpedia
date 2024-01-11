@@ -99,6 +99,8 @@ class PhoneController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Phone::where('id', $id)->delete();
+
+        return redirect('phone')->with('status', 'Data Deleted Successfully');
     }
 }
