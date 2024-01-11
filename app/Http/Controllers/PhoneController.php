@@ -67,7 +67,8 @@ class PhoneController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $phone = Phone::findorfail($id);
+        return view('dashboard.phone-edit', compact('phone'))->with('title', 'Edit Phone');
     }
 
     /**
@@ -75,7 +76,22 @@ class PhoneController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'brand' => 'required',
+            'model' => 'required',
+            'price' => 'required',
+            'stock' => 'required'
+        ]);
+
+        $request = Phone::where('id', $id)->update([
+            'brand' => $request->brand,
+            'model' => $request->model,
+            'price' => $request->price,
+            'stock' => $request->stock,
+            'desc' => $request->desc
+        ]);
+
+        return redirect('phone')->with('status', 'Data Edited Successfully');
     }
 
     /**
