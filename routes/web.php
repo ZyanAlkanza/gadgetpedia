@@ -25,6 +25,10 @@ Route::get('/user/trash', [UserController::class, 'trash']);
 Route::get('user/restore/{id?}',[UserController::class, 'restore']);
 Route::get('user/deletepermanently/{id?}', [UserController::class, 'deletepermanently']);
 
+Route::get('/phone/trash', [PhoneController::class, 'trash']);
+Route::get('phone/restore/{id?}', [PhoneController::class, 'restore']);
+Route::get('phone/deletepermanently/{id?}', [PhoneController::class, 'deletepermanently']);
+
 Route::resource('/', HomeController::class);
 Route::resource('/dashboard', DashboardController::class);
 Route::resource('/user', UserController::class);

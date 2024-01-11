@@ -103,4 +103,32 @@ class PhoneController extends Controller
 
         return redirect('phone')->with('status', 'Data Deleted Successfully');
     }
+
+    public function trash()
+    {
+        $phone = Phone::onlyTrashed()->paginate(8);
+        return view('dashboard.phone-trash', compact('phone'))->with('title', 'Trash');
+    }
+
+    public function restore($id = null)
+    {
+        if($id !== null){
+            Phone::onlyTrashed()->where('id', $id)->restore();
+        }else{
+            Phone::onlyTrashed()->restore();
+        }
+
+        return redirect('phone/trash')->with('status', 'Data Restored Successfully');
+    }
+
+    public function deletepermanently($id = null)
+    {
+        if($id !== null){
+            Phone::onlyTrashed()->where('id', $id)->forceDelete();
+        }else{
+            Phone::onlyTrashed()->forceDelete();
+        }
+
+        return redirect('phone/trash')->with('status', 'Data Permanently Deleted Successfully');
+    }
 }
