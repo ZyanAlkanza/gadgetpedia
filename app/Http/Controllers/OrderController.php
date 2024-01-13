@@ -81,9 +81,12 @@ class OrderController extends Controller
      */
     public function edit(string $id)
     {
-        $order = order::findOrFail($id);
+        $order = order::with('user', 'orderdetails')->findOrFail($id);
 
-        return view('dashboard.order-edit', compact('order'))->with('title', 'Edit Order');
+        $user = User::where('role', 2)->get();
+        $phone = Phone::all();
+
+        return view('dashboard.order-edit', compact('order', 'user', 'phone'))->with('title', 'Edit Order');
     }
 
     /**
@@ -91,7 +94,28 @@ class OrderController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $totalamount = $request->price * $request->quantity;
+
+        $order = Order::find($id);
+
+        if ($order) {
+            $order->update([
+                'user_id' => $request->user_id,
+                'totalamount' => $totalamount,
+            ]);
+
+            $orderdetail = $order->orderDetails()->first();
+
+            if ($orderdetail) {
+                $orderdetail->update([
+                    'phone_id' => $request->phone_id,
+                    'quantity' => $request->quantity,
+                    'price' => $request->price,
+                ]);
+            }
+        }
+
+        return redirect('order')->with('status', 'Data Edited Successfully');
     }
 
     /**
