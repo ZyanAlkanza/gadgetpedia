@@ -22,7 +22,7 @@
         <div class="accessibility max-[768px]:h-24 mt-8 flex max-[768px]:flex-col px-8">
             <div class="searchbar max-[768px]:w-full w-1/2">
                 <form action="{{ url('order') }}" method="get">
-                    <input type="text" name="search" id="search" placeholder="Search..." class="max-[768px]:w-full rounded-full px-4 py-2 focus:outline-none border-2 focus:border-pink-500">
+                    <input type="text" name="search" id="search" placeholder="Search..." class="max-[768px]:w-full rounded-full px-4 py-2 focus:outline-none border-2 focus:border-pink-500" autocomplete="off">
                 </form>
             </div>
             <div class="buttongroup max-[768px]:w-full w-1/2 flex justify-end max-[768px]:mt-2">
@@ -47,14 +47,14 @@
 
                     @foreach ($order as $key => $item)
 
-                        @php
-                            $total = $item->totalamount * $item->orderdetails->quantity
-                        @endphp
+                        {{-- @php
+                            $total = $item->orderdetails->price * $item->orderdetails->quantity
+                        @endphp --}}
 
                         <tr class="bg-white border-b">
                             <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap text-center">{{ $loop->iteration }}</th>
                             <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap">{{ $item->user->username }}</th>
-                            <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap">Rp. {{number_format($total, 0, ',', '.')}}</th>
+                            <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap">Rp. {{number_format($item->totalamount, 0, ',', '.')}}</th>
                             <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap flex justify-center gap-2">
                                 <a href="{{ url('order/'.$item->id) }}"  class="border-2 border-pink-500 bg-pink-500 px-4 py-2 text-white hover:bg-pink-600 rounded-full">Detail</a>
                                 <a href="{{ url('order/'.$item->id.'/edit') }}"  class="border-2 border-pink-500 px-4 py-2 text-pink-500 hover:bg-pink-600 hover:text-white rounded-full">Edit</a>

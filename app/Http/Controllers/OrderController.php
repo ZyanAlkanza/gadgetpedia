@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Orderdetail;
 use App\Models\Phone;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -30,7 +31,10 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view('dashboard.order-create')->with('title', 'Add Order');
+        $user   = User::where('role', 2)->get();
+        $phone  = Phone::all();
+
+        return view('dashboard.order-create', compact('user', 'phone'))->with('title', 'Add Order');
     }
 
     /**
@@ -38,7 +42,27 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $totalamount = $request->price * $request->quantity;
+
+        $request->validate([
+            'user_id' => 'required',
+            'phone_id' => 'required',
+            'price' => 'required',
+            'quantity' => 'required'
+        ]);
+
+        $order = Order::create([
+            'user_id' => $request->user_id,
+            'totalamount' =>$totalamount,
+        ]);
+
+        $orderdetail = $order->orderDetails()->create([
+            'phone_id' => $request->phone_id,
+            'quantity' => $request->quantity,
+            'price' => $request->price
+        ]);
+
+        return redirect('order')->with('status', 'Data Added Successfully');
     }
 
     /**

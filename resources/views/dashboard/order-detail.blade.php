@@ -24,12 +24,12 @@
             <label for="" class="font-semibold mt-2 font-medium uppercase text-sm">Price</label>
             <h5>Rp. {{ number_format($orderdetail->price, 0, ',', '.') }}</h5>
 
-            @php
+            {{-- @php
                 $total =$order->totalamount*$orderdetail->quantity
-            @endphp
+            @endphp --}}
 
             <label for="" class="font-semibold mt-12 font-medium uppercase text-sm text-pink-500 max-[768px]:mt-4">Total Amount</label>
-            <h5 class="font-semibold text-xl">Rp. {{ number_format($total, 0, ',', '.')  }}</h5>
+            <h5 class="font-semibold text-xl">Rp. {{ number_format($order->totalamount, 0, ',', '.')  }}</h5>
         </section>
     </div>
 
