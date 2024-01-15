@@ -12,7 +12,7 @@
             
             <div class="flex-grow"></div>
             
-            <a href=""><li class="max-[768px]:text-2xl max-[768px]:text-center py-4 mb-16 hover:text-red-500"><i class="fi fi-rr-sign-out-alt "></i><span class="max-[768px]:hidden ml-3">Logout</span></li></a>
+            <a href="{{ url('/') }}"><li class="max-[768px]:text-2xl max-[768px]:text-center py-4 mb-16 hover:text-red-500"><i class="fi fi-rr-sign-out-alt "></i><span class="max-[768px]:hidden ml-3">Logout</span></li></a>
         </ul>
     </div>
 </section>

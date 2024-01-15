@@ -17,9 +17,9 @@ class DashboardController extends Controller
         // $order = Order::with('user','orderdetails', 'orderdetails.phone')->get();
 
         $user = DB::table('users')->select(DB::raw('count(*) as total_user'))->where('role', 2)->where('deleted_at', null)->get();
-        $product = DB::table(('phones'))->select(DB::raw('count(*) as total_product'))->get();
+        $product = DB::table(('phones'))->select(DB::raw('count(*) as total_product'))->where('deleted_at', null)->get();
         $outofstock = DB::table(('phones'))->select(DB::raw('count(*) as total_outofstock'))->where('stock',0)->get();
-        $order = DB::table('orders')->select(DB::raw('count(*) as total_order'))->get();
+        $order = DB::table('orders')->select(DB::raw('count(*) as total_order'))->where('deleted_at', null)->get();
 
         // return $outofstock;
         
