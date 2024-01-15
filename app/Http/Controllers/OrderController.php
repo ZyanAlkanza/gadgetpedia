@@ -7,6 +7,7 @@ use App\Models\Orderdetail;
 use App\Models\Phone;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -123,6 +124,56 @@ class OrderController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $order = Order::findOrFail($id);
+
+        $order->orderDetails()->delete();
+        $order->delete();
+
+        return redirect('order')->with('status', 'Data Deleted Successfully');
+    }
+
+    public function trash()
+    {
+        
+        $order = DB::table('orders')
+        ->join('orderdetails', 'orders.id', '=', 'orderdetails.order_id')
+        ->join('users', 'orders.user_id', '=', 'users.id')
+        ->join('phones', 'orderdetails.phone_id', '=', 'phones.id')
+        ->whereNotNull('orders.deleted_at')
+        ->paginate(8);
+
+        return view('dashboard.order-trash', compact('order'))->with('title', 'Trash');
+    }
+
+    public function restore($id = null)
+    {
+        if($id !== null){
+            $order = Order::onlyTrashed()->where('id', $id);
+            $order->restore();
+            
+            $orderdetail = Orderdetail::onlyTrashed()->where('order_id', $id);
+            $orderdetail->restore();
+        }else{
+            $order = Order::onlyTrashed();
+            $order->restore();
+        
+            $orderdetail = Orderdetail::onlyTrashed();
+            $orderdetail->restore();
+        }
+
+        return redirect('order/trash')->with('status', 'Data Restored Successfully');
+    }
+
+    public function deletepermanently($id = null)
+    {
+        if($id !== null){
+            $order = Order::onlyTrashed()->findOrFail($id);
+            $orderdetail = $order->orderdetails()->forceDelete();
+            $order->forceDelete();
+        }else{
+            $orderdetail  = Orderdetail::onlyTrashed()->forceDelete();
+            $order = Order::onlyTrashed()->forceDelete();
+        }
+        return redirect('order/trash')->with('status', 'Data Permanently Deleted Successfully');
     }
 }
