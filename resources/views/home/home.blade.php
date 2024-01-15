@@ -22,16 +22,19 @@
 
     <section class=" w-full h-fit flex flex-wrap justify-between px-14 max-[768px]:px-4 max-[768px]:gap-2 gap-4">
         
-        <a href="/{product-id}">
-            <div class="card bg-gray-200 w-[250px] max-[768px]:w-[185px] h-80 p-2 rounded-lg">
-                <div class="image bg-slate-400 w-full h-2/3 rounded-lg">
-                    <img src="" alt="">
+        @foreach ($phone as $item)
+            <a href="{{ url('detail/'. $item->id) }}">
+            <div class="card bg-gray-100 hover:bg-gray-200 w-[250px] max-[768px]:w-[185px] h-max p-2 rounded-lg">
+                <div class="image rounded-lg">
+                    <img src="{{ asset('img/galaxy.webp') }}" alt="">
                 </div>
-                <h1 class="title font-bold truncate ... mt-2">Samsung Galaxy S23 Ultra</h1>
-                <h5 class="brand font-light">Samsung</h5>
-                <h3 class="price font-bold mt-2">Rp. 20.000.000</h3>
+                <h1 class="title font-bold truncate ... mt-2">{{ $item->brand }} {{ $item->model }}</h1>
+                <h5 class="brand font-light">{{ $item->brand }}</h5>
+                <h3 class="price font-bold mt-2">Rp. {{ number_format($item->price, 0, ',','.') }}</h3>
             </div>
         </a>
+        @endforeach
+        
 
         
 

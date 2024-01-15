@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Phone;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,7 +12,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home.home');
+        $phone = Phone::all();
+
+        return view('home.home', compact('phone'));
     }
 
     /**
@@ -35,7 +38,9 @@ class HomeController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $phone = Phone::findorfail($id);
+        
+        return view('home.detail', compact('phone'));
     }
 
     /**
