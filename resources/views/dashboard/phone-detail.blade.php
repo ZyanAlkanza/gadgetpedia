@@ -33,7 +33,7 @@
             <h5>Rp. {{ number_format($phone->price, 0, ',','.')  }}</h5>
 
             <label for="" class="font-semibold mt-2 font-medium uppercase text-sm">Description</label>
-            <h5>{{ $phone->desc }}</h5>
+            <textarea cols="30" rows="8" readonly  class="focus:outline-none resize-none">{{ $phone->desc }}</textarea>
         </section>
     </div>
 

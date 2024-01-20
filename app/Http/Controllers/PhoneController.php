@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Image;
 use App\Models\Phone;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PhoneController extends Controller
 {
@@ -84,7 +85,8 @@ class PhoneController extends Controller
     public function edit(string $id)
     {
         $phone = Phone::findorfail($id);
-        return view('dashboard.phone-edit', compact('phone'))->with('title', 'Edit Phone');
+        $images = Image::where('phone_id', $id)->get();
+        return view('dashboard.phone-edit', compact('phone', 'images'))->with('title', 'Edit Phone');
     }
 
     /**
@@ -99,13 +101,30 @@ class PhoneController extends Controller
             'stock' => 'required'
         ]);
 
-        $request = Phone::where('id', $id)->update([
+        $phone = Phone::where('id', $id)->update([
             'brand' => $request->brand,
             'model' => $request->model,
             'price' => $request->price,
             'stock' => $request->stock,
             'desc' => $request->desc
         ]);
+
+        $no = 1;
+
+        if($request->has('images')){
+            if($request->oldImages){
+                Image::where('phone_id', $id)->forceDelete();
+            }
+
+            foreach($request->file('images') as $image){
+                $imageName = $request['model'].$no++.'.'.$image->getClientOriginalExtension();
+                $image->move(public_path('img'), $imageName);
+                Image::create([
+                    'phone_id' => $id,
+                    'image' => $imageName
+                ]);
+            }
+        }
 
         return redirect('phone')->with('status', 'Data Edited Successfully');
     }
