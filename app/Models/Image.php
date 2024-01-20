@@ -6,19 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Phone extends Model
+class Image extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $guarded = ['id'];
 
-    public function orderDetails()
+    public function phone()
     {
-        return $this->hasMany(Orderdetail::class);
-    }
-
-    public function image()
-    {
-        return $this->hasMany(Image::class);
+        return $this->belongsTo(Phone::class);
     }
 }

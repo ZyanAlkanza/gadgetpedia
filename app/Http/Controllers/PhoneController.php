@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use App\Models\Phone;
 use Illuminate\Http\Request;
 
@@ -41,13 +42,26 @@ class PhoneController extends Controller
             'stock' => 'required'
         ]);
 
-        $request = Phone::create([
+        $phone = Phone::create([
             'brand' => $request->brand,
             'model' => $request->model,
             'price' => $request->price,
             'stock' => $request->stock,
             'desc' => $request->desc
         ]);
+        
+        $no = 1;
+
+        if($request->has('images')){
+            foreach($request->file('images') as $image){
+                $imageName = $request['model'].$no++.'.'.$image->getClientOriginalExtension();
+                $image->move(public_path('img'), $imageName);
+                Image::create([
+                    'phone_id' => $phone->id,
+                    'image' => $imageName
+                ]);
+            }
+        }
 
         return redirect('phone')->with('status', 'Data Added Successfully');
     }
@@ -58,8 +72,10 @@ class PhoneController extends Controller
     public function show(string $id)
     {
         $phone = Phone::findorfail($id);
-        
-        return view('dashboard.phone-detail', compact('phone'))->with('title', 'Phone Detail');
+        $images = Image::where('phone_id', $id)->get();
+
+        // return $image;
+        return view('dashboard.phone-detail', compact('phone', 'images'))->with('title', 'Phone Detail');
     }
 
     /**
