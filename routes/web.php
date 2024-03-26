@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OutOfStockController;
 use App\Http\Controllers\PhoneController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +36,8 @@ Route::get('order/deletepermanently/{id?}', [OrderController::class, 'deleteperm
 
 Route::get('/', [HomeController::class, 'index'])->name('home.home');
 Route::get('/detail/{id}', [HomeController::class, 'show']);
+
+Route::get('/outofstock', [OutOfStockController::class, 'index'])->name('outofstock');
 
 Route::resource('/dashboard', DashboardController::class);
 Route::resource('/user', UserController::class);
