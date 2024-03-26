@@ -33,7 +33,7 @@ Route::get('/order/trash', [OrderController::class, 'trash']);
 Route::get('order/restore/{id?}', [OrderController::class, 'restore']);
 Route::get('order/deletepermanently/{id?}', [OrderController::class, 'deletepermanently']);
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home.home');
 Route::get('/detail/{id}', [HomeController::class, 'show']);
 
 Route::resource('/dashboard', DashboardController::class);

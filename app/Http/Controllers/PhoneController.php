@@ -135,6 +135,8 @@ class PhoneController extends Controller
     public function destroy(string $id)
     {
         Phone::where('id', $id)->delete();
+        Image::where('phone_id', $id)->delete();
+        
 
         return redirect('phone')->with('status', 'Data Deleted Successfully');
     }
@@ -142,6 +144,7 @@ class PhoneController extends Controller
     public function trash()
     {
         $phone = Phone::onlyTrashed()->paginate(8);
+
         return view('dashboard.phone-trash', compact('phone'))->with('title', 'Trash');
     }
 
@@ -149,8 +152,10 @@ class PhoneController extends Controller
     {
         if($id !== null){
             Phone::onlyTrashed()->where('id', $id)->restore();
+            Image::onlyTrashed()->where('phone_id', $id)->restore();
         }else{
             Phone::onlyTrashed()->restore();
+            Image::onlyTrashed()->restore();
         }
 
         return redirect('phone/trash')->with('status', 'Data Restored Successfully');
@@ -158,9 +163,26 @@ class PhoneController extends Controller
 
     public function deletepermanently($id = null)
     {
+
         if($id !== null){
+            $images = Image::onlyTrashed()->where('phone_id', $id)->get();
+            foreach ($images as $image) {
+                $path = public_path('img/' . $image->image);
+                if (file_exists($path)) {
+                    unlink($path);
+                }
+            }
+            Image::onlyTrashed()->where('phone_id', $id)->forceDelete();
             Phone::onlyTrashed()->where('id', $id)->forceDelete();
         }else{
+            $images = Image::onlyTrashed()->get();
+            foreach ($images as $image) {
+                $path = public_path('img/' . $image->image);
+                if (file_exists($path)) {
+                    unlink($path);
+                }
+            }
+            Image::onlyTrashed()->forceDelete();
             Phone::onlyTrashed()->forceDelete();
         }
 

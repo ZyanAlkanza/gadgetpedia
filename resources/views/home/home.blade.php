@@ -26,11 +26,11 @@
             <a href="{{ url('detail/'. $item->id) }}">
             <div class="card bg-gray-100 hover:bg-gray-200 w-[250px] max-[768px]:w-[185px] h-max p-2 rounded-lg">
                 <div class="image rounded-lg">
-                    <img src="{{ asset('img/galaxy.webp') }}" alt="">
+                    <img src="{{ asset('img/'. $item->image[0]['image']) }}" alt="">
                 </div>
-                <h1 class="title font-bold truncate ... mt-2">{{ $item->brand }} {{ $item->model }}</h1>
+                <h1 class="title font-semibold truncate ... mt-2">{{ $item->brand }} {{ $item->model }}</h1>
                 <h5 class="brand font-light">{{ $item->brand }}</h5>
-                <h3 class="price font-bold mt-2">Rp. {{ number_format($item->price, 0, ',','.') }}</h3>
+                <h3 class="price font-semibold mt-2">Rp. {{ number_format($item->price, 0, ',','.') }}</h3>
             </div>
         </a>
         @endforeach
