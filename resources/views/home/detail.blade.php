@@ -41,7 +41,7 @@
             <h5 class="mt-4 max-[768px]:text-sm">Price</h5>
             <h1 class="font-bold text-3xl max-[768px]:text-2xl">Rp. {{ number_format($phone->price, 0,',','.') }}</h1>
 
-            <button class="bg-pink-500 text-white px-28 py-2 rounded mt-8 hover:bg-pink-600 max-[768px]:w-full max-[768px]:mb-4">Buy Now</button>
+            <button class="bg-pink-500 text-white px-28 py-2 rounded-full mt-8 hover:bg-pink-600 max-[768px]:w-full max-[768px]:mb-4">Buy Now</button>
         </div>
     </section>
 

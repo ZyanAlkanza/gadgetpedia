@@ -16,7 +16,14 @@
             <h1 class="text-2xl text-center font-bold text-pink-500">Gadget<span class="text-slate-700">pedia</span></h1>
         </div>
         <div class="menu flex justify-between items-center">
-            <a href="/login" class="bg-pink-500 px-4 pt-1 pb-2 text-white rounded-full hover:bg-pink-600">Login</a>
+
+            @if (Auth::check())
+                <a href="{{ url('logout') }}" class="bg-pink-500 px-4 pt-1 pb-2 text-white rounded-full hover:bg-pink-600">Logout</a>
+            @else
+                <a href="{{ url('login') }}" class="bg-pink-500 px-4 pt-1 pb-2 text-white rounded-full hover:bg-pink-600">Login</a>
+            @endif
+
+            
         </div>
     </nav>
 

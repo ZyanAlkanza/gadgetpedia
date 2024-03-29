@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AutentikasiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
@@ -22,24 +23,28 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/user/trash', [UserController::class, 'trash']);
-Route::get('user/restore/{id?}',[UserController::class, 'restore']);
-Route::get('user/deletepermanently/{id?}', [UserController::class, 'deletepermanently']);
+Route::get('/user/trash', [UserController::class, 'trash'])->middleware('auth');
+Route::get('user/restore/{id?}',[UserController::class, 'restore'])->middleware('auth');
+Route::get('user/deletepermanently/{id?}', [UserController::class, 'deletepermanently'])->middleware('auth');
 
-Route::get('/phone/trash', [PhoneController::class, 'trash']);
-Route::get('phone/restore/{id?}', [PhoneController::class, 'restore']);
-Route::get('phone/deletepermanently/{id?}', [PhoneController::class, 'deletepermanently']);
+Route::get('/phone/trash', [PhoneController::class, 'trash'])->middleware('auth');
+Route::get('phone/restore/{id?}', [PhoneController::class, 'restore'])->middleware('auth');
+Route::get('phone/deletepermanently/{id?}', [PhoneController::class, 'deletepermanently'])->middleware('auth');
 
-Route::get('/order/trash', [OrderController::class, 'trash']);
-Route::get('order/restore/{id?}', [OrderController::class, 'restore']);
-Route::get('order/deletepermanently/{id?}', [OrderController::class, 'deletepermanently']);
+Route::get('/order/trash', [OrderController::class, 'trash'])->middleware('auth');
+Route::get('order/restore/{id?}', [OrderController::class, 'restore'])->middleware('auth');
+Route::get('order/deletepermanently/{id?}', [OrderController::class, 'deletepermanently'])->middleware('auth');
 
 Route::get('/', [HomeController::class, 'index'])->name('home.home');
 Route::get('/detail/{id}', [HomeController::class, 'show']);
 
-Route::get('/outofstock', [OutOfStockController::class, 'index'])->name('outofstock');
+Route::get('/outofstock', [OutOfStockController::class, 'index'])->name('outofstock')->middleware('auth');
 
-Route::resource('/dashboard', DashboardController::class);
-Route::resource('/user', UserController::class);
-Route::resource('/phone', PhoneController::class);
-Route::resource('/order', OrderController::class);
+Route::get('login', [AutentikasiController::class, 'login'])->name('login')->middleware('guest');
+Route::post('autentikasi', [AutentikasiController::class, 'autentikasi'])->middleware('guest');
+Route::get('logout', [AutentikasiController::class, 'logout']);
+
+Route::resource('/dashboard', DashboardController::class)->middleware('auth');
+Route::resource('/user', UserController::class)->middleware('auth');
+Route::resource('/phone', PhoneController::class)->middleware('auth');
+Route::resource('/order', OrderController::class)->middleware('auth');
