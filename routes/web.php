@@ -44,7 +44,7 @@ Route::get('login', [AutentikasiController::class, 'login'])->name('login')->mid
 Route::post('autentikasi', [AutentikasiController::class, 'autentikasi'])->middleware('guest');
 Route::get('logout', [AutentikasiController::class, 'logout']);
 
-Route::resource('/dashboard', DashboardController::class)->middleware('auth');
-Route::resource('/user', UserController::class)->middleware('auth');
-Route::resource('/phone', PhoneController::class)->middleware('auth');
-Route::resource('/order', OrderController::class)->middleware('auth');
+Route::resource('/dashboard', DashboardController::class)->middleware('userRole');
+Route::resource('/user', UserController::class)->middleware('userRole');
+Route::resource('/phone', PhoneController::class)->middleware('userRole');
+Route::resource('/order', OrderController::class)->middleware('userRole');
