@@ -1,7 +1,7 @@
 @include('dashboard.template-header')
 
 <body class="flex justify-center items-center h-full">
-    <div class="card bg-gray-200 w-max max-[768px]:w-full max-[768px]:mx-2 h-max rounded-xl flex flex-col p-4">
+    <div class="card bg-gray-100 w-max max-[768px]:w-full max-[768px]:mx-2 h-max rounded-xl flex flex-col p-4">
         <h1 class="text-center text-xl font-semibold text-pink-500 mt-2">Add Phone</h1>
         
         <form action="{{ url('phone') }}" method="post" class="flex flex-col" enctype="multipart/form-data">
