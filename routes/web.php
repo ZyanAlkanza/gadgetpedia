@@ -43,6 +43,8 @@ Route::get('/outofstock', [OutOfStockController::class, 'index'])->name('outofst
 Route::get('login', [AutentikasiController::class, 'login'])->name('login')->middleware('guest');
 Route::post('autentikasi', [AutentikasiController::class, 'autentikasi'])->middleware('guest');
 Route::get('logout', [AutentikasiController::class, 'logout']);
+Route::get('register', [AutentikasiController::class, 'register'])->middleware('guest');
+Route::post('registrasi', [AutentikasiController::class, 'registrasi'])->middleware('guest');
 
 Route::resource('/dashboard', DashboardController::class)->middleware('userRole');
 Route::resource('/user', UserController::class)->middleware('userRole');

@@ -25,25 +25,33 @@
                 </div>
             </div>
         @endif
+        @if (session('status'))
+        <div id="alert" class="bg-pink-500 text-white px-4 py-1 rounded-full flex items-center justify-between">
+            <div class="flex items-center">
+                <span class="text-sm font-semibold">{{ session('status') }}</span>
+            </div>
+            <button id="closeBtn" class="ml-8 font-normal">&times;</button>
+        </div>
+        @endif
     </section>
 
     <form action="{{ url('autentikasi') }}" method="post">
         @csrf
         <section class=" w-full h-fit flex justify-center items-center py-10 px-14 max-[768px]:px-4 max-[768px]:gap-2 gap-4">
             <div class="kartu bg-gray-100 w-1/4 h-1/4 rounded-lg flex flex-col justify-center px-4">
-                <h1 class="text-2xl text-pink-500 font-bold text-center py-4">Login</h1>
+                <h1 class="text-2xl text-pink-500 font-bold text-center py-6">Login</h1>
                 <div class="field-email flex flex-col">
                     <label class="mb-2">Email</label>
                     <input type="email" name="email" id="email" value="{{ old('email') }}" class="px-3 py-1 focus:outline-none border-2 border-pink-300 focus:border-2 focus:border-pink-500 rounded-full mt-1" autofocus autocomplete="off">
                 </div>
-                <div class="field-password flex flex-col">
+                <div class="field-password flex flex-col mt-2">
                     <label class="mb-2">Password</label>
                     <input type="password" id="password" name="password" class="px-3 py-1 focus:outline-none border-2 border-pink-300 focus:border-2 focus:border-pink-500 rounded-full mt-1">
                 </div>
 
-                <button type="submit" class="bg-pink-500 hover:bg-pink-600 w-full py-2 my-8 text-white rounded-full">Masuk</button>
+                <button type="submit" class="bg-pink-500 hover:bg-pink-600 w-full py-2 my-10 text-white rounded-full">Masuk</button>
 
-                <div class="register mb-8">
+                <div class="register mb-10">
                     <h5 class="text-sm text-center">Belum memiliki akun? <a href="{{ url('register') }}" class="text-pink-500 text-underline">Registrasi</a></h5>
                 </div>
             </div>
