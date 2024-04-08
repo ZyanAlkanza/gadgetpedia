@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OutOfStockController;
 use App\Http\Controllers\PhoneController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +46,10 @@ Route::post('autentikasi', [AutentikasiController::class, 'autentikasi'])->middl
 Route::get('logout', [AutentikasiController::class, 'logout']);
 Route::get('register', [AutentikasiController::class, 'register'])->middleware('guest');
 Route::post('registrasi', [AutentikasiController::class, 'registrasi'])->middleware('guest');
+
+Route::get('buynow/{id?}', [TransactionController::class, 'buynow'])->middleware('auth');
+Route::post('checkout', [TransactionController::class, 'checkout'])->middleware('auth');
+Route::get('payment', [TransactionController::class, 'payment'])->middleware('auth');
 
 Route::resource('/dashboard', DashboardController::class)->middleware('userRole');
 Route::resource('/user', UserController::class)->middleware('userRole');

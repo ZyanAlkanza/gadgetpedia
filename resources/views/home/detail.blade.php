@@ -8,61 +8,110 @@
     {{-- Tailwind --}}
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <script>
+        tailwind.config = {
+            theme: {
+                fontFamily: {
+                    'sans': ['inter']
+                },
+                extend: {
+                    colors: {
+                        'primary': '#D94496',
+                        'secondary': '#1E1E1E', 
+                        'abu-abu': '#f5f5f5',
+                    },
+                }
+            }
+        }
+    </script>
+
+    {{-- Remixicon --}}
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+
+    {{-- Google Font --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+
     <title>Gadgetpedia</title>
 </head>
 <body class="h-full">
-    <nav class="h-14 px-14 flex items-center max-[768px]:px-4">
-        <h1 class="text-2xl font-bold text-pink-500">Gadget<span class="text-slate-700">pedia</span></h1>
+    <nav class="w-full h-[68px] px-[120px] flex items-center">
+        <h1 class="text-2xl font-bold text-pink-500 font-inter">Gadget<span class="text-secondary">pedia</span></h1>
     </nav>
 
-    <section class="h-[700px] flex px-14 max-[768px]:flex-col">
-        <div class="left w-1/2 max-[768px]:w-full max-[768px]:h-1/2 pt-4">
-            <div class="mainPicture h-[75%] max-[768px]:h-[60%] flex justify-center">
-                {{-- <img src="{{ asset('img/galaxy.webp') }}" class="h-full"> --}}
-                <img src="{{ asset('img/' . $images[0]['image']) }}" class="h-full" id="mainImage">
-            </div>
-            <div class="thumbPicture h-[25%] flex justify-center gap-2">
-                @foreach($images as $image)
-                    <div class="thumb w-24 h-24 mt-4 flex justify-center">
-                        <img src="{{ asset('img/' . $image['image']) }}" class="thumbnail">
-                    </div>
-                @endforeach
-            </div>
+    <section class="w-full px-[120px]">
+        <div class="button">
+            <a href="{{ url('/') }}" class="bg-pink-100 py-2 px-4 rounded text-primary hover:bg-pink-500 hover:text-white transition duration-300 ease-in-out">Back</a>
         </div>
-        <div class="right w-1/2 max-[768px]:w-full pt-4 max-[768px]:pt-0">
-            <h1 class="font-semibold text-lg max-[768px]:text-base text-pink-500">Detail Product</h1>
 
-            <h1 class="font-bold text-2xl mt-4 max-[768px]:mt-2 max-[768px]:text-xl">{{ $phone->brand }} {{ $phone->model }}</h1>
-            <h5 class="mt-2 max-[768px]:text-sm">Stock: {{ $phone->stock }} Pcs</h5>
+        <div class="content flex flex-row mt-2">
+            <div class="image w-[40%] flex flex-col justify-center items-end">
+                <div class="cover w-[400px] h-[400px] rounded-xl bg-abu-abu">
+                    <img src="{{ asset('img/' . $images[0]['image']) }}" class="mix-blend-multiply" id="mainImage">
+                </div>
+                <div class="thumb w-[400px] h-[120px] mt-4 flex gap-5">
+                    @foreach($images as $image)
+                    <div class=" w-[120px] h-[120px] flex justify-center items-center rounded-lg bg-abu-abu">
+                        <img src="{{ asset('img/' . $image['image']) }}" class="thumbnail size-[90%] mix-blend-multiply">
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+            <div class="text w-[60%] px-4 py-2 ml-6 rounded-xl bg-abu-abu">
+                <h5 class="text-base font-bold">Detail Product</h5>
+                <h1 class="text-xl font-medium mt-4">{{ $phone->brand }} {{ $phone->model }}</h1>
+                <h1 class="text-2xl font-bold mt-2 text-primary">Rp. {{ number_format($phone->price, 0,',','.') }}</h1>
+                <h5 class="text-sm font-light mt-2">Stock: {{ $phone->stock }} Pcs</h5>
+                
+                <div class="badge flex gap-2 mt-4">
+                    <div class="badge-1 flex p-2 rounded-lg bg-pink-100">
+                        <div class="icon flex justify-center items-center">
+                            <i class="ri-truck-line ri-xl text-primary"></i>
+                        </div>
+                        <div class="title flex flex-col align-right justify-center ml-2">
+                            <h1 class="text-sm font-bold text-primary">Free Shipping</h1>
+                            <h5 class="text-[9px] font-light">Jabodetabek Area</h5>
+                        </div>
+                    </div>
+                    <div class="badge-2 flex p-2 rounded-lg bg-pink-100">
+                        <div class="icon flex justify-center items-center">
+                            <i class="ri-discount-percent-line ri-xl text-primary"></i>
+                        </div>
+                        <div class="title flex flex-col align-right justify-center ml-2">
+                            <h1 class="text-sm font-bold text-primary">0% Installment</h1>
+                            <h5 class="text-[9px] font-light">For Certain Bank</h5>
+                        </div>
+                    </div>
+                </div>
+                
+                <h5 class="text-base font-bold mt-2">Spesification</h5>
+                <textarea class="resize-none focus:outline-none h-56 w-80 mt-2 text-sm bg-abu-abu" readonly>{{ $phone->desc }}</textarea>
 
-            <h5 class="font-semibold mt-4 max-[768px]:text-sm">Spesification</h5>
-            <textarea class="resize-none focus:outline-none max-[768px]:text-sm" name="desc" id="" cols="40" rows="13" readonly>{{ $phone->desc }}</textarea>
-
-            <h5 class="mt-4 max-[768px]:text-sm">Price</h5>
-            <h1 class="font-bold text-3xl max-[768px]:text-2xl">Rp. {{ number_format($phone->price, 0,',','.') }}</h1>
-
-            <button class="bg-pink-500 text-white px-28 py-2 rounded-full mt-8 hover:bg-pink-600 max-[768px]:w-full max-[768px]:mb-4">Buy Now</button>
+                <div class="button mt-4">
+                    <a href="{{ url('buynow/'. $phone->id) }}" class="bg-primary px-4 py-2 rounded text-white hover:bg-pink-500 transition duration-300 ease-in-out">Buy Now</a>
+                    <a href="" class="bg-pink-100 px-4 py-2 rounded text-primary hover:bg-pink-500 hover:text-white transition duration-300 ease-in-out">Add To Cart</a>
+                </div>
+            </div>
         </div>
     </section>
 
     <script>
-        // Dapatkan elemen-elemen HTML yang dibutuhkan
         const mainImage = document.getElementById('mainImage');
         const thumbnails = document.querySelectorAll('.thumbnail');
-      
-        // Tambahkan event listener untuk setiap thumbnail
+    
         thumbnails.forEach(thumbnail => {
-          thumbnail.addEventListener('click', function() {
-            // Ganti sumber gambar pada kolom image utama dengan sumber gambar thumbnail yang diklik
-            mainImage.src = thumbnail.src;
-
-            thumbnails.forEach(otherThumbnail => {
-                otherThumbnail.classList.remove('border-2', 'border-pink-500', 'rounded');
+            thumbnail.addEventListener('click', function() {
+                mainImage.src = thumbnail.src;
+    
+                thumbnails.forEach(otherThumbnail => {
+                    otherThumbnail.parentNode.classList.remove('border-2', 'border-pink-500', 'rounded');
+                });
+                thumbnail.parentNode.classList.add('border-2', 'border-pink-500', 'rounded');
             });
-
-            thumbnail.classList.add('border-2', 'border-pink-500', 'rounded');
-          });
         });
-      </script>
+    </script>
+    
 </body>
 </html>

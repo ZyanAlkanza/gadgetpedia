@@ -1,0 +1,47 @@
+[
+    {
+        "type": "Directory",
+        "name": "c:\\laragon\\www\\gadgetpedia\\app\\Http\\Controllers",
+        "parent_id": null,
+        "fsPath": "c:\\laragon\\www\\gadgetpedia\\app\\Http\\Controllers",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "BP4sefTIxaMQkHYm"
+    },
+    {
+        "type": "Directory",
+        "name": "c:\\laragon\\www\\gadgetpedia\\app\\Models",
+        "parent_id": null,
+        "fsPath": "c:\\laragon\\www\\gadgetpedia\\app\\Models",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "ET3Cyn0FeU9pquhV"
+    },
+    {
+        "type": "Directory",
+        "name": "c:\\laragon\\www\\gadgetpedia\\resources\\views",
+        "parent_id": null,
+        "fsPath": "c:\\laragon\\www\\gadgetpedia\\resources\\views",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "5eGC0lFpAw6yoXu4"
+    },
+    {
+        "type": "File",
+        "name": "c:\\laragon\\www\\gadgetpedia\\routes\\web.php",
+        "parent_id": null,
+        "fsPath": "c:\\laragon\\www\\gadgetpedia\\routes\\web.php",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "Dv6XVziCE3qWwSxg"
+    },
+    {
+        "type": "Directory",
+        "name": "c:\\laragon\\www\\gadgetpedia\\database\\migrations",
+        "parent_id": null,
+        "fsPath": "c:\\laragon\\www\\gadgetpedia\\database\\migrations",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "Aciu3Xo75MOVmLl8"
+    }
+]
