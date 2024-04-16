@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use App\Models\Order;
 use App\Models\Orderdetail;
 use App\Models\Phone;
@@ -71,10 +72,14 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        $order = order::with('user')->findOrFail($id);
-        $orderdetail = orderdetail::with('phone')->findOrFail($id);
+        // $order = order::with('user')->findOrFail($id);
+        // $orderdetail = orderdetail::with('phone')->findOrFail($id);
 
-        return view('dashboard.order-detail', compact('order', 'orderdetail'))->with('title', 'Detail Order');
+        $order = Order::with('user', 'orderdetails.phone.image')->findOrFail($id);
+
+        // dd($order);
+
+        return view('dashboard.order-detail', compact('order'))->with('title', 'Detail Order');
     }
 
     /**

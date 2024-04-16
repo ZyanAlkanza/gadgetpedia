@@ -6,7 +6,7 @@
         <section class="left w-full flex flex-col">
             <a href="{{ url('order') }}" class="bg-pink-500 text-white px-6 py-2 w-max rounded-full hover:bg-pink-600">Back</a>
             <div class="image h-full mr-4 mt-8">
-                <img src="{{ asset('img/galaxy.webp') }}" alt="">
+                <img src="{{ asset('img/'.$order->orderdetails->phone->image[0]->image) }}" class="mix-blend-multiply">
             </div>
         </section>
 
@@ -14,15 +14,19 @@
             <h1 class="font-semibold text-lg mb-8 mt-4 text-pink-500 max-[768px]:mb-2">Detail Order</h1>
             <label for="" class="font-semibold mt-2 uppercase text-sm">Username</label>
             <h5>{{ $order->user->username }}</h5>
+            {{-- <h5>{{ $order->user->username }}</h5> --}}
 
             <label for="" class="font-semibold mt-2 font-medium uppercase text-sm">Phone Model</label>
-            <h5>{{ $orderdetail->phone->brand }} {{ $orderdetail->phone->model }}</h5>
+            <h5>{{ $order->orderdetails->phone->brand }} {{ $order->orderdetails->phone->model }}</h5>
+            {{-- <h5>{{ $orderdetail->phone->brand }} {{ $orderdetail->phone->model }}</h5> --}}
 
             <label for="" class="font-semibold mt-2 font-medium uppercase text-sm">Quantity</label>
-            <h5>{{ $orderdetail->quantity }} Pcs</h5>
+            <h5>{{ $order->orderdetails->quantity }} Pcs</h5>
+            {{-- <h5>{{ $orderdetail->quantity }} Pcs</h5> --}}
 
             <label for="" class="font-semibold mt-2 font-medium uppercase text-sm">Price</label>
-            <h5>Rp. {{ number_format($orderdetail->price, 0, ',', '.') }}</h5>
+            <h5>Rp. {{ number_format($order->orderdetails->price, 0, ',','.')  }}</h5>
+            {{-- <h5>Rp. {{ number_format($orderdetail->price, 0, ',', '.') }}</h5> --}}
 
             {{-- @php
                 $total =$order->totalamount*$orderdetail->quantity

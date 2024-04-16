@@ -55,8 +55,8 @@
             </div>
             <div class="menu flex items-center">
                 @if (Auth::check())
-                <a href="{{ url('') }}" class="hover:text-primary transition duration-300 ease-in-out mx-2"><i class="ri-box-3-line ri-xl"></i></a>
-                <a href="{{ url('') }}" class="hover:text-primary transition duration-300 ease-in-out mx-2"><i class="ri-shopping-cart-line ri-xl"></i></a>
+                <a href="{{ url('') }}" class="hover:text-primary transition duration-300 ease-in-out mx-2" title="Transaction"><i class="ri-box-3-line ri-xl"></i></a>
+                <a href="{{ url('') }}" class="hover:text-primary transition duration-300 ease-in-out mx-2" title="My Cart"><i class="ri-shopping-cart-line ri-xl"></i></a>
                 
                 <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar" class="ml-2 flex text-sm bg-secondary rounded-full md:me-0 focus:ring-4 focus:ring-primary" type="button">
                     <span class="sr-only">Open user menu</span>
@@ -66,7 +66,7 @@
                 <div id="dropdownAvatar" class="z-10 hidden bg-abu-abu rounded-lg shadow w-44">
                     <ul class="py-2 text-sm text-secondary" aria-labelledby="dropdownUserAvatarButton">
                         <li>
-                            <a href="{{ url('#') }}" class="block px-4 py-2 hover:bg-gray-200 transition duration-300 ease-in-out"><i class="ri-account-circle-line ri-xl mr-2"></i>My Profile</a>
+                            <a href="{{ url('profile') }}" class="block px-4 py-2 hover:bg-gray-200 transition duration-300 ease-in-out"><i class="ri-user-line ri-xl mr-2"></i>My Profile</a>
                         </li>
                     </ul>
                     <div class="py-2 text-sm text-secondary">

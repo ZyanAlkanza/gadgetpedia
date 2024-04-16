@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -138,5 +139,36 @@ class UserController extends Controller
         }
 
         return redirect('user/trash')->with('status', 'Data Permanently Deleted Successfully');
+    }
+
+    public function profile(){
+
+        $user = User::where('id', Auth::user()->id)->first();
+
+        return view('home.profile', compact('user'));
+    }
+
+    public function editprofile(){
+        $user = User::where('id', Auth::user()->id)->first();
+
+        return view('home.editprofile', compact('user'));
+    }
+
+    public function updateprofile(Request $request){
+        $request->validate([
+            'username' => 'required',
+            'email'     => 'required',
+            'phone'     => 'numeric|nullable',
+            'address'   => 'nullable'
+        ]);
+
+        $user = User::where('id', Auth::user()->id)->update([
+            'username' => $request->username,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+        ]);
+
+        return redirect('profile');
     }
 }

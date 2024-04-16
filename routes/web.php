@@ -51,6 +51,10 @@ Route::get('buynow/{id?}', [TransactionController::class, 'buynow'])->middleware
 Route::post('checkout', [TransactionController::class, 'checkout'])->middleware('auth');
 Route::get('payment', [TransactionController::class, 'payment'])->middleware('auth');
 
+Route::get('profile', [UserController::class, 'profile'])->middleware('auth');
+Route::get('profile/edit', [UserController::class, 'editprofile'])->middleware('auth');
+Route::put('profile/update', [UserController::class, 'updateprofile'])->middleware('auth');
+
 Route::resource('/dashboard', DashboardController::class)->middleware('userRole');
 Route::resource('/user', UserController::class)->middleware('userRole');
 Route::resource('/phone', PhoneController::class)->middleware('userRole');
