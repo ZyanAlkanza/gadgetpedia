@@ -38,4 +38,10 @@ class TransactionController extends Controller
     public function payment(){
         return view('home.payment');
     }
+
+    public function status(){
+        $order = Order::where('user_id', Auth::user()->id)->with('orderdetails.phone.image')->get();
+        
+        return view('home.transaction', compact('order'));
+    }
 }

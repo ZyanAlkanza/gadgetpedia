@@ -36,10 +36,10 @@ Route::get('/order/trash', [OrderController::class, 'trash'])->middleware('auth'
 Route::get('order/restore/{id?}', [OrderController::class, 'restore'])->middleware('auth');
 Route::get('order/deletepermanently/{id?}', [OrderController::class, 'deletepermanently'])->middleware('auth');
 
+Route::get('/outofstock', [OutOfStockController::class, 'index'])->name('outofstock')->middleware('auth');
+
 Route::get('/', [HomeController::class, 'index'])->name('home.home');
 Route::get('/detail/{id}', [HomeController::class, 'show']);
-
-Route::get('/outofstock', [OutOfStockController::class, 'index'])->name('outofstock')->middleware('auth');
 
 Route::get('login', [AutentikasiController::class, 'login'])->name('login')->middleware('guest');
 Route::post('autentikasi', [AutentikasiController::class, 'autentikasi'])->middleware('guest');
@@ -54,6 +54,8 @@ Route::get('payment', [TransactionController::class, 'payment'])->middleware('au
 Route::get('profile', [UserController::class, 'profile'])->middleware('auth');
 Route::get('profile/edit', [UserController::class, 'editprofile'])->middleware('auth');
 Route::put('profile/update', [UserController::class, 'updateprofile'])->middleware('auth');
+
+Route::get('transaction', [TransactionController::class, 'status'])->middleware('auth');
 
 Route::resource('/dashboard', DashboardController::class)->middleware('userRole');
 Route::resource('/user', UserController::class)->middleware('userRole');
