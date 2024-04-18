@@ -42,8 +42,16 @@
     </nav>
 
     <section class="w-full px-[120px]">
-        <div class="button">
+        <div class="button flex justify-between">
             <a href="{{ url('/') }}" class="bg-pink-100 py-2 px-4 rounded text-primary hover:bg-pink-500 hover:text-white transition duration-300 ease-in-out">Back</a>
+            @if (session('status'))
+                <div id="alert" class="bg-pink-500 text-white px-4 py-1 rounded-full flex items-center justify-between">
+                    <div class="flex items-center">
+                        <span class="text-sm font-semibold">{{ session('status') }}</span>
+                    </div>
+                    <button id="closeBtn" class="ml-8 font-normal">&times;</button>
+                </div>
+            @endif
         </div>
 
         <div class="content flex flex-row gap-4 mt-3">
@@ -86,7 +94,11 @@
                     
 
                     {{-- <a href="" class="bg-primary py-2 px-8 rounded text-white hover:bg-pink-600 transition duration-300 ease-in-out">Checkout</a> --}}
-                    <button type="submit" class="bg-primary py-2 px-8 rounded text-white hover:bg-pink-600 transition duration-300 ease-in-out">Checkout</button>
+                    @if ($cart->isNotEmpty())
+                        <button type="submit" class="bg-primary py-2 px-8 rounded text-white hover:bg-pink-600 transition duration-300 ease-in-out">Checkout</button>
+                    @else
+                        <h1 class="justify-center flex items-center h-20">The Cart is Empty</h1>
+                    @endif
                 </form>
 
             </div>
@@ -108,6 +120,20 @@
             </div>
         </div>
     </section>
+
+    <script>
+        function closeAlert() {
+        document.getElementById('alert').style.display = 'none';
+        }
+
+        document.getElementById('closeBtn').addEventListener('click', function () {
+            closeAlert();
+        });
+
+        setTimeout(function () {
+            closeAlert();
+        }, 5000);
+    </script>
 
 </body>
 </html>

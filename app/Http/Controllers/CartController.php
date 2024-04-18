@@ -24,7 +24,7 @@ class CartController extends Controller
                                 ->first();
 
         if ($existingEntry) {
-            return redirect()->route('home.home')->with('error', 'Barang yang Anda input sudah ada.');
+            return redirect()->route('home.home')->with('status', 'Product is already in the cart!');
         }
 
         Cart::create([
@@ -33,13 +33,13 @@ class CartController extends Controller
             'quantity' => 1,
         ]);
 
-        return redirect()->route('home.home');
+        return redirect()->route('home.home')->with('status', 'Product successfully added to cart!');
     }
 
     public function deletecart($id){
         
         Cart::where('id', $id)->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('status', 'Product has been successfully deleted from the cart!');
     }
 }

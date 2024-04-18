@@ -51,7 +51,15 @@
         </div>
         <div class="navigation flex flex-row gap-2">
             <div class="searchBar">
-                <input type="text" class="bg-abu-abu w-96 h-9 mr-2 rounded-full px-4 border-2 border-gray-100 focus:border-2 focus:border-pink-500 focus:outline-none" placeholder="Search">
+                @if (session('status'))
+                    <div id="alert" class="bg-pink-500 text-white px-4 py-1 rounded-full flex items-center justify-between">
+                        <div class="flex items-center">
+                            <span class="text-sm font-semibold">{{ session('status') }}</span>
+                        </div>
+                        <button id="closeBtn" class="ml-8 font-normal">&times;</button>
+                    </div>
+                @endif
+                {{-- <input type="text" class="bg-abu-abu w-96 h-9 mr-2 rounded-full px-4 border-2 border-gray-100 focus:border-2 focus:border-pink-500 focus:outline-none" placeholder="Search"> --}}
             </div>
             <div class="menu flex items-center">
                 @if (Auth::check())
@@ -73,7 +81,6 @@
                         <a href="{{ url('logout') }}" class="block px-4 py-2 hover:bg-gray-200 transition duration-300 ease-in-out"><i class="ri-logout-box-r-line ri-xl mr-2"></i>Sign out</a>
                     </div>
                 </div>
-
                 @else
                     <a href="{{ url('login') }}" class="bg-primary py-1 px-4 ml-8 rounded text-white hover:bg-pink-500 transition duration-300 ease-in-out">Login</a>
                 @endif
@@ -111,11 +118,24 @@
                 </div>
             </a>
         @endforeach
-        
     </section>
 
     {{-- Flowbite --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+
+    <script>
+        function closeAlert() {
+        document.getElementById('alert').style.display = 'none';
+        }
+
+        document.getElementById('closeBtn').addEventListener('click', function () {
+            closeAlert();
+        });
+
+        setTimeout(function () {
+            closeAlert();
+        }, 5000);
+    </script>
 
 </body>
 </html>

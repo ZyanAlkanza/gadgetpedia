@@ -33,7 +33,7 @@ class TransactionController extends Controller
             'price' => $request->price,
         ]);
 
-        return redirect('payment')->with('status', 'Data Added Successfully');
+        return redirect('payment')->with('status', '');
     }
 
     public function cartcheckout(Request $request){
@@ -54,7 +54,7 @@ class TransactionController extends Controller
 
         Cart::where('user_id', $cartItems[0]['user_id'])->delete();
         
-        return redirect('payment')->with('status', 'Data Added Successfully');
+        return redirect('payment')->with('status', '');
     }
 
     public function payment(){
