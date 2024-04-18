@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Image;
 use App\Models\Order;
 use App\Models\Orderdetail;
@@ -32,6 +33,27 @@ class TransactionController extends Controller
             'price' => $request->price,
         ]);
 
+        return redirect('payment')->with('status', 'Data Added Successfully');
+    }
+
+    public function cartcheckout(Request $request){
+        $cartItems = $request->input('cart');
+        
+        foreach ($cartItems as $cartItem) {
+            $order = Order::create([
+                'user_id' => $cartItem['user_id'],
+                'totalamount' => $cartItem['price'] * $cartItem['quantity'],
+            ]);
+
+            $order->orderDetails()->create([
+                'phone_id' => $cartItem['phone_id'],
+                'quantity' => $cartItem['quantity'],
+                'price' => $cartItem['price'],
+            ]);
+        }
+
+        Cart::where('user_id', $cartItems[0]['user_id'])->delete();
+        
         return redirect('payment')->with('status', 'Data Added Successfully');
     }
 

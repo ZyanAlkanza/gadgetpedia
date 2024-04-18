@@ -89,10 +89,18 @@
                 <h5 class="text-base font-bold mt-2">Spesification</h5>
                 <textarea class="resize-none focus:outline-none h-56 w-80 mt-2 text-sm bg-abu-abu" readonly>{{ $phone->desc }}</textarea>
 
-                <div class="button mt-4">
-                    <a href="{{ url('buynow/'. $phone->id) }}" class="bg-primary px-4 py-2 rounded text-white hover:bg-pink-500 transition duration-300 ease-in-out">Buy Now</a>
-                    <a href="" class="bg-pink-100 px-4 py-2 rounded text-primary hover:bg-pink-500 hover:text-white transition duration-300 ease-in-out">Add To Cart</a>
-                </div>
+                <form action="{{ url('addtocart') }}" method="POST">
+                    <div class="button mt-4">
+                        <a href="{{ url('buynow/'. $phone->id) }}" class="bg-primary px-4 py-2 rounded text-white hover:bg-pink-500 transition duration-300 ease-in-out">Buy Now</a>
+                        
+                        @csrf
+                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                        <input type="hidden" name="phone_id" value="{{ $phone->id }}">
+                    
+                        <button type="submit" class="bg-pink-100 px-4 py-2 rounded text-primary hover:bg-pink-500 hover:text-white transition duration-300 ease-in-out">Add To Cart</button>
+                        {{-- <a href="{{ url('') }}" class="bg-pink-100 px-4 py-2 rounded text-primary hover:bg-pink-500 hover:text-white transition duration-300 ease-in-out">Add To Cart</a> --}}
+                    </div>
+                </form>
             </div>
         </div>
     </section>

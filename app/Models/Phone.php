@@ -21,4 +21,9 @@ class Phone extends Model
     {
         return $this->hasMany(Image::class);
     }
+
+    public function cart()
+    {
+        return $this->hasMany(Cart::class);
+    }
 }

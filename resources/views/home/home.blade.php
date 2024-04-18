@@ -56,7 +56,7 @@
             <div class="menu flex items-center">
                 @if (Auth::check())
                 <a href="{{ url('transaction') }}" class="hover:text-primary transition duration-300 ease-in-out mx-2" title="Transaction"><i class="ri-box-3-line ri-xl"></i></a>
-                <a href="{{ url('') }}" class="hover:text-primary transition duration-300 ease-in-out mx-2" title="My Cart"><i class="ri-shopping-cart-line ri-xl"></i></a>
+                <a href="{{ url('cart') }}" class="hover:text-primary transition duration-300 ease-in-out mx-2" title="My Cart"><i class="ri-shopping-cart-line ri-xl"></i></a>
                 
                 <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar" class="ml-2 flex text-sm bg-secondary rounded-full md:me-0 focus:ring-4 focus:ring-primary" type="button">
                     <span class="sr-only">Open user menu</span>

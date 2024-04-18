@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AutentikasiController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
@@ -49,7 +50,12 @@ Route::post('registrasi', [AutentikasiController::class, 'registrasi'])->middlew
 
 Route::get('buynow/{id?}', [TransactionController::class, 'buynow'])->middleware('auth');
 Route::post('checkout', [TransactionController::class, 'checkout'])->middleware('auth');
+Route::post('cartcheckout', [TransactionController::class, 'cartcheckout'])->middleware('auth');
 Route::get('payment', [TransactionController::class, 'payment'])->middleware('auth');
+
+Route::get('cart',[CartController::class, 'cart'])->middleware('auth');
+Route::post('addtocart',[CartController::class, 'addtocart'])->middleware('auth');
+Route::get('deletecart/{id}',[CartController::class, 'deletecart'])->middleware('auth');
 
 Route::get('profile', [UserController::class, 'profile'])->middleware('auth');
 Route::get('profile/edit', [UserController::class, 'editprofile'])->middleware('auth');
