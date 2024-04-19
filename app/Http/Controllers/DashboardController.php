@@ -21,10 +21,28 @@ class DashboardController extends Controller
         $outofstock = DB::table(('phones'))->select(DB::raw('count(*) as total_outofstock'))->where('stock',0)->get();
         $order = DB::table('orders')->select(DB::raw('count(*) as total_order'))->where('deleted_at', null)->get();
 
-        // return $outofstock;
-        
+        $pending = Order::where('status', 0)->count();
+        $process = Order::where('status', 1)->count();
+        $delivery = Order::where('status', 2)->count();
+        $success = Order::where('status', 3)->count();
 
-        return view('dashboard.index', compact('user','product','outofstock','order'))->with('title', 'Dashboard');
+
+        // $chart = DB::table('orders')->select(DB::raw("DATE_FORMAT(created_at, '%M') as month"), DB::raw("COUNT(*) as total"))->groupBy('month')->get();
+
+        // $labels = [];
+        // $data = [];
+        
+        // foreach ($chart as $row) {
+        //     $labels[] = $row->month;
+        //     $data[] = $row->total;
+        // }
+        
+        // $chartdata = [
+        //     'labels' => $labels,
+        //     'data' => $data,
+        // ];
+
+        return view('dashboard.index', compact('user','product','outofstock','order', 'pending', 'process', 'delivery', 'success'))->with('title', 'Dashboard');
     }
 
     /**

@@ -6,10 +6,14 @@
     {{-- Flaticon --}}
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
 
+    {{-- AlpineJs --}}
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     {{-- Tailwind --}}
     <script src="https://cdn.tailwindcss.com"></script>
+
+    {{-- ChartJs --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <title>{{ $title }}</title>
 </head>
