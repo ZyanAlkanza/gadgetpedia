@@ -20,9 +20,9 @@ class OrderController extends Controller
         if($request->has('search')){
             $order = Order::whereHas('user', function($query) use ($request) {
                 $query->where('username', 'LIKE', '%' . $request->search . '%');
-            })->with('user')->get();
+            })->with('user')->paginate(8);
         }else{
-            $order = Order::with('user', 'orderdetails')->get();
+            $order = Order::with('user', 'orderdetails')->paginate(8);
         }
 
         return view('dashboard.order', compact('order'))->with('title', 'Order');
@@ -55,6 +55,7 @@ class OrderController extends Controller
 
         $order = Order::create([
             'user_id' => $request->user_id,
+            'status' => 0,
             'totalamount' =>$totalamount,
         ]);
 
@@ -77,8 +78,6 @@ class OrderController extends Controller
 
         $order = Order::with('user', 'orderdetails.phone.image')->findOrFail($id);
 
-        // dd($order);
-
         return view('dashboard.order-detail', compact('order'))->with('title', 'Detail Order');
     }
 
@@ -88,7 +87,6 @@ class OrderController extends Controller
     public function edit(string $id)
     {
         $order = order::with('user', 'orderdetails')->findOrFail($id);
-
         $user = User::where('role', 2)->get();
         $phone = Phone::all();
 
@@ -107,6 +105,7 @@ class OrderController extends Controller
         if ($order) {
             $order->update([
                 'user_id' => $request->user_id,
+                'status' => $request->status,
                 'totalamount' => $totalamount,
             ]);
 
@@ -139,7 +138,6 @@ class OrderController extends Controller
 
     public function trash()
     {
-        
         $order = DB::table('orders')
         ->join('orderdetails', 'orders.id', '=', 'orderdetails.order_id')
         ->join('users', 'orders.user_id', '=', 'users.id')
@@ -179,6 +177,7 @@ class OrderController extends Controller
             $orderdetail  = Orderdetail::onlyTrashed()->forceDelete();
             $order = Order::onlyTrashed()->forceDelete();
         }
+        
         return redirect('order/trash')->with('status', 'Data Permanently Deleted Successfully');
     }
 }

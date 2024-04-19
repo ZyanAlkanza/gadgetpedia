@@ -7,7 +7,7 @@
         <form action="{{ url('order') }}" method="post" class="flex flex-col">
             @csrf
             <label for="user_id" class="mt-6">Username</label>
-            <select name="user_id" id="user_id" class="px-3 py-1 border-2 border-pink-300 rounded-full focus:outline-none focus:border-pink-500 mt-1" autofocus>
+            <select name="user_id" id="user_id" class="px-3 py-1 bg-white border-2 border-pink-300 rounded-full focus:outline-none focus:border-pink-500 mt-1" autofocus>
                     <option value="">-Select Username-</option>
                 @foreach ($user as $item)
                     <option value="{{ $item->id }}" {{ old('user_id') == $item->id ? 'selected' : null }}>{{ $item->username }}</option>
@@ -20,7 +20,7 @@
             </div>
 
             <label for="phone_id" class="mt-1">Phone Model</label>
-            <select name="phone_id" id="phone_id" class="px-3 py-1 border-2 border-pink-300 rounded-full focus:outline-none focus:border-pink-500 mt-1" autofocus>
+            <select name="phone_id" id="phone_id" class="px-3 py-1 bg-white border-2 border-pink-300 rounded-full focus:outline-none focus:border-pink-500 mt-1" autofocus>
                 <option value="">-Select Phone Model-</option>
                 @foreach ($phone as $item)
                     <option value="{{ $item->id }}" {{ old('phone_id') == $item->id ? 'selected' : null }}>{{ $item->brand }} {{ $item->model }}</option>
@@ -33,7 +33,7 @@
             </div>
 
             <label for="price" class="mt-1">Price</label>
-            <select name="price" id="price" class="px-3 py-1 border-2 border-pink-300 rounded-full focus:outline-none focus:border-pink-500 mt-1" autofocus>
+            <select name="price" id="price" class="px-3 py-1 bg-white border-2 border-pink-300 rounded-full focus:outline-none focus:border-pink-500 mt-1" autofocus>
                 <option value="">-Select Phone Model-</option>
                 @foreach ($phone as $item)
                     <option value="{{ $item->price }}" {{ old('price') == $item->price ? 'selected' : null }}>{{ $item->brand }} {{ $item->model }} | Rp.{{number_format($item->price, 0, ',','.') }}</option>
@@ -61,7 +61,7 @@
             @enderror
             </div> --}}
             
-            <button type="submit" name="submit" id="submit" class="px-2 py-2 rounded-full bg-pink-500 text-white mt-8 mb-4">Submit</button>
+            <button type="submit" name="submit" id="submit" class="px-2 py-2 rounded-lg bg-pink-500 hover:bg-pink-600 text-white mt-8 mb-4">Submit</button>
         </form>
     </div>
 </body>
