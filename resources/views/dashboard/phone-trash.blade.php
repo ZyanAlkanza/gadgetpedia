@@ -5,7 +5,7 @@
         <div class="title text-xl font-bold mt-2 ml-8 flex justify-between h-[35px]">
             <div class="left-contain flex items-center gap-2">
                 <div class="button">
-                    <a href="{{ url('phone') }}" class="bg-pink-500 px-4 py-2 text-sm rounded-full font-semibold text-white">Back</a>
+                    <a href="{{ url('phone') }}" class="bg-pink-100 hover:bg-pink-500 px-4 py-2 text-sm rounded-lg font-semibold text-pink-500 hover:text-white">Back</a>
                 </div>
                 <div class="title">
                     Temporary Phone Data
@@ -29,12 +29,12 @@
                 <input type="text" placeholder="Search..." class="max-[768px]:w-full rounded-full px-4 py-2 focus:outline-none border-2 focus:border-pink-500">
             </div>
             <div class="buttongroup max-[768px]:w-full w-1/2 flex justify-end max-[768px]:mt-2">
-                <a href="{{ url('phone/restore') }}" class="add border-2 bg-pink-500 px-4  py-2 text-sm rounded-full text-white hover:bg-pink-600 text-lg">Restore All</a>
+                <a href="{{ url('phone/restore') }}" class="add border-2 bg-pink-500 px-4 py-2 mr-2 text-sm rounded-lg text-white hover:bg-pink-600 text-lg">Restore All</a>
                 {{-- <a href="" class="recycle border-2 border-pink-500 px-4  py-2 text-sm rounded-full text-pink-500 hover:bg-pink-600 hover:text-white text-lg ml-2">Delete All</a> --}}
 
                 <div x-data="{ showModal: false, itemId: null }">
                     <!-- Tombol Hapus -->
-                    <button @click="showModal = true" class="border-2 border-pink-500 px-4 py-2 text-pink-500 rounded-full hover:bg-pink-600 hover:text-white">Delete</button>
+                    <button @click="showModal = true" class="border-2 border-pink-500 px-4 py-2 text-pink-500 rounded-lg hover:bg-pink-600 hover:text-white">Delete</button>
                 
                     <!-- Modal Konfirmasi Hapus -->
                     <div x-show="showModal" class="fixed inset-0 z-50 overflow-auto bg-black bg-opacity-50 flex items-center justify-center">
@@ -47,10 +47,10 @@
 
                                 <form action="{{ url('phone/deletepermanently') }}" method="get">
                                     @csrf
-                                    <button type="submit" class="border-2 border-pink-500 px-4 py-2 text-pink-500 rounded-full hover:bg-pink-600 hover:text-white">Delete</button>
+                                    <button type="submit" class="border-2 border-pink-500 px-4 py-2 text-pink-500 rounded-lg hover:bg-pink-600 hover:text-white">Delete</button>
                                 </form>
                                 <div class="cancel">
-                                    <button @click="showModal = false" class="border-2 border-pink-500 bg-pink-500 px-4 py-2 text-white hover:bg-pink-600 rounded-full">Cancel</button>
+                                    <button @click="showModal = false" class="border-2 border-pink-500 bg-pink-500 px-4 py-2 text-white hover:bg-pink-600 rounded-lg">Cancel</button>
                                 </div>
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                             <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap text-right">{{ $item->stock }} Pcs</th>
                             <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap text-right">Rp. {{ number_format($item->price, 0, ',', '.'); }}</th>  
                             <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap flex justify-center gap-2">
-                                <a href="{{ url('phone/restore/'.$item->id) }}"  class="border-2 border-pink-500 bg-pink-500 px-4 py-2 text-white hover:bg-pink-600 rounded-full">Restore</a>
+                                <a href="{{ url('phone/restore/'.$item->id) }}"  class="border-2 border-pink-500 bg-pink-500 px-4 py-2 text-white hover:bg-pink-600 rounded-lg">Restore</a>
                                 
                                 {{-- <form action="{{ url('user/'. $item->id) }}" method="post" onsubmit="return confirm('Are you sure delete this data..?')">
                                     @method('DELETE')
@@ -92,7 +92,7 @@
                                 
                                 <div x-data="{ showModal: false, itemId: null }">
                                     <!-- Tombol Hapus -->
-                                    <button @click="showModal = true" class="border-2 border-pink-500 px-4 py-2 text-pink-500 rounded-full hover:bg-pink-600 hover:text-white">Delete</button>
+                                    <button @click="showModal = true" class="border-2 border-pink-500 px-4 py-2 text-pink-500 rounded-lg hover:bg-pink-600 hover:text-white">Delete</button>
                                 
                                     <!-- Modal Konfirmasi Hapus -->
                                     <div x-show="showModal" class="fixed inset-0 z-50 overflow-auto bg-black bg-opacity-50 flex items-center justify-center">
@@ -105,10 +105,10 @@
 
                                                 <form action="{{ url('phone/deletepermanently/'. $item->id) }}" method="get">
                                                     @csrf
-                                                    <button type="submit" class="border-2 border-pink-500 px-4 py-2 text-pink-500 rounded-full hover:bg-pink-600 hover:text-white">Delete</button>
+                                                    <button type="submit" class="border-2 border-pink-500 px-4 py-2 text-pink-500 rounded-lg hover:bg-pink-600 hover:text-white">Delete</button>
                                                 </form>
                                                 <div class="cancel">
-                                                    <button @click="showModal = false" class="border-2 border-pink-500 bg-pink-500 px-4 py-2 text-white hover:bg-pink-600 rounded-full">Cancel</button>
+                                                    <button @click="showModal = false" class="border-2 border-pink-500 bg-pink-500 px-4 py-2 text-white hover:bg-pink-600 rounded-lg">Cancel</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -129,7 +129,6 @@
         </div>
 
     </section>
-
 
     <script>
         function closeAlert() {

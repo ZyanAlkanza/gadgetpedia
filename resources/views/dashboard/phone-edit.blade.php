@@ -55,7 +55,7 @@
             <label for="desc" class="mt-8">Description</label>
             <textarea name="desc" id="desc" cols="30" rows="5" placeholder="Product's Description" class="resize-none text-sm focus:outline-none focus:border-2 border-2 focus:border-pink-500 p-2" maxlength="250">{{ old('desc', $phone->desc) }}</textarea>
             
-            <button type="submit" name="submit" id="submit" class="px-2 py-2 rounded-full bg-pink-500 text-white mt-8 mb-4">Submit</button>
+            <button type="submit" name="submit" id="submit" class="px-2 py-2 rounded-lg bg-pink-500 hover:bg-pink-600 text-white mt-8 mb-4">Submit</button>
         </form>
     </div>
 </body>

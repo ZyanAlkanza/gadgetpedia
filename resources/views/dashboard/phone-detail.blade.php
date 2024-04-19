@@ -4,7 +4,7 @@
 
     <div class="content w-full h-full flex bg-white rounded-lg p-8 max-[768px]:h-max max-[768px]:p-4 max-[768px]:flex-col">
         <section class="left w-full flex flex-col">
-            <a href="{{ url('phone') }}"  class="bg-pink-500 text-white px-6 py-2 w-max rounded-full hover:bg-pink-600">Back</a>
+            <a href="{{ url('phone') }}"  class="bg-pink-100 text-pink-500 px-6 py-2 w-max rounded-lg hover:bg-pink-500 hover:text-white">Back</a>
             <div class="image h-[64%] flex justify-center mr-4 mt-2">
                 <img src="{{ asset('img/' . $images[0]['image']) }}" class="h-full" id="mainImage">
             </div>
@@ -20,19 +20,11 @@
         <section class="right w-full h-full flex flex-col">
             <h1 class="font-semibold text-lg mt-2 text-pink-500 max-[768px]:mb-2">Detail Phone</h1>
             
-            <label for="" class="font-semibold mt-2 uppercase text-sm">Brand</label>
-            <h5>{{ $phone->brand }}</h5>
+            <h5 class="mt-3 text-xl font-semibold">{{ $phone->brand }} {{ $phone->model }}</h5>
+            <h5 class="mt-1 font-light text-sm">Stock: {{ $phone->stock }} Pcs</h5>
+            <h5 class="mt-1 text-2xl font-bold text-pink-500">Rp. {{ number_format($phone->price, 0, ',','.')  }}</h5>
 
-            <label for="" class="font-semibold mt-2 font-medium uppercase text-sm">Model</label>
-            <h5>{{ $phone->model }}</h5>
-
-            <label for="" class="font-semibold mt-2 font-medium uppercase text-sm">Stock</label>
-            <h5>{{ $phone->stock }} Pcs</h5>
-
-            <label for="" class="font-semibold mt-2 font-medium uppercase text-sm">Price</label>
-            <h5>Rp. {{ number_format($phone->price, 0, ',','.')  }}</h5>
-
-            <label for="" class="font-semibold mt-2 font-medium uppercase text-sm">Description</label>
+            <label for="" class="font-semibold mt-4 font-medium uppercase text-sm">Description</label>
             <textarea cols="30" rows="8" readonly  class="focus:outline-none resize-none">{{ $phone->desc }}</textarea>
         </section>
     </div>
