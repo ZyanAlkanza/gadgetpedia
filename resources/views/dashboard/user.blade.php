@@ -26,8 +26,8 @@
                 </form>
             </div>
             <div class="buttongroup max-[768px]:w-full w-1/2 flex justify-end max-[768px]:mt-2">
-                <a href="{{ '/user/create' }}" class="add border-2 bg-pink-500 px-4  py-2 text-sm rounded-full text-white hover:bg-pink-600 text-lg">Add</a>
-                <a href="{{ url('user/trash') }}" class="recycle border-2 border-pink-500 px-4  py-2 text-sm rounded-full text-pink-500 hover:bg-pink-600 hover:text-white text-lg ml-2">Recycle</a>
+                <a href="{{ '/user/create' }}" class="add border-2 bg-pink-500 px-4  py-2 text-sm rounded-lg text-white hover:bg-pink-600 text-lg">Add</a>
+                <a href="{{ url('user/trash') }}" class="recycle border-2 border-pink-500 px-4  py-2 text-sm rounded-lg text-pink-500 hover:bg-pink-600 hover:text-white text-lg ml-2">Recycle</a>
             </div>
         </div>
         
@@ -36,9 +36,10 @@
                 <thead class="text-xs text-black uppercase bg-white">
                     <tr>
                         <th scope="col" class="px-6 py-3 w-[5%] text-center">No</th>
-                        <th scope="col" class="px-6 py-3 w-[30%]">Username</th>
-                        <th scope="col" class="px-6 py-3 w-[30%]">Email</th>
-                        <th scope="col" class="px-6 py-3 w-[35%] text-center">Action</th>
+                        <th scope="col" class="px-6 py-3 w-[25%]">Username</th>
+                        <th scope="col" class="px-6 py-3 w-[20%]">Email</th>
+                        <th scope="col" class="px-6 py-3 w-[20%]">Phone</th>
+                        <th scope="col" class="px-6 py-3 w-[30%] text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,8 +49,11 @@
                             <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap text-center">{{ $user->firstItem()+$key }}</th>
                             <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap">{{ $item->username }}</th>
                             <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap">{{ $item->email }}</th>
+                            <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap">
+                                {{  $item->phone ?? '-' }} 
+                            </th>
                             <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap flex justify-center gap-2">
-                                <a href="{{ url('user/'.$item->id.'/edit') }}"  class="border-2 border-pink-500 bg-pink-500 px-4 py-2 text-white hover:bg-pink-600 rounded-full">Edit</a>
+                                <a href="{{ url('user/'.$item->id.'/edit') }}"  class="border-2 border-pink-500 bg-pink-500 px-4 py-2 text-white hover:bg-pink-600 rounded-lg">Edit</a>
                                 
                                 {{-- <form action="{{ url('user/'. $item->id) }}" method="post" onsubmit="return confirm('Are you sure delete this data..?')">
                                     @method('DELETE')
@@ -59,7 +63,7 @@
                                 
                                 <div x-data="{ showModal: false, itemId: null }">
                                     <!-- Tombol Hapus -->
-                                    <button @click="showModal = true" class="border-2 border-pink-500 px-4 py-2 text-pink-500 rounded-full hover:bg-pink-600 hover:text-white">Delete</button>
+                                    <button @click="showModal = true" class="border-2 border-pink-500 px-4 py-2 text-pink-500 rounded-lg hover:bg-pink-600 hover:text-white">Delete</button>
                                 
                                     <!-- Modal Konfirmasi Hapus -->
                                     <div x-show="showModal" class="fixed inset-0 z-50 overflow-auto bg-black bg-opacity-50 flex items-center justify-center">
@@ -73,16 +77,15 @@
                                                 <form action="{{ url('user/'. $item->id) }}" method="post">
                                                     @method('DELETE')
                                                     @csrf
-                                                    <button type="submit" class="border-2 border-pink-500 px-4 py-2 text-pink-500 rounded-full hover:bg-pink-600 hover:text-white">Delete</button>
+                                                    <button type="submit" class="border-2 border-pink-500 px-4 py-2 text-pink-500 rounded-lg hover:bg-pink-600 hover:text-white">Delete</button>
                                                 </form>
 
-                                                <button @click="showModal = false" class="border-2 border-pink-500 bg-pink-500 px-4 py-2 text-white hover:bg-pink-600 rounded-full">Cancel</button>
+                                                <button @click="showModal = false" class="border-2 border-pink-500 bg-pink-500 px-4 py-2 text-white hover:bg-pink-600 rounded-lg">Cancel</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 
-
                             </th>
                         </tr>
                     @endforeach

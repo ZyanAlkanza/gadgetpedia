@@ -34,7 +34,7 @@
 
                 <div x-data="{ showModal: false, itemId: null }">
                     <!-- Tombol Hapus -->
-                    <button @click="showModal = true" class="border-2 border-pink-500 px-4 py-2 text-pink-500 rounded-lg hover:bg-pink-600 hover:text-white">Delete</button>
+                    <button @click="showModal = true" class="border-2 border-pink-500 px-4 py-2 text-pink-500 rounded-lg hover:bg-pink-600 hover:text-white">Delete All</button>
                 
                     <!-- Modal Konfirmasi Hapus -->
                     <div x-show="showModal" class="fixed inset-0 z-50 overflow-auto bg-black bg-opacity-50 flex items-center justify-center">
@@ -66,9 +66,9 @@
                     <tr>
                         <th scope="col" class="px-6 py-3 w-[5%] text-center">No</th>
                         <th scope="col" class="px-6 py-3 w-[20%]">Brand</th>
-                        <th scope="col" class="px-6 py-3 w-[40%]">Model</th>
-                        <th scope="col" class="px-6 py-3 w-[5%] text-center">Stock</th>
-                        <th scope="col" class="px-6 py-3 w-[10%] text-center">Price</th>
+                        <th scope="col" class="px-6 py-3 w-[20%]">Model</th>
+                        <th scope="col" class="px-6 py-3 w-[10%] text-center">Stock</th>
+                        <th scope="col" class="px-6 py-3 w-[15%] text-center">Price</th>
                         <th scope="col" class="px-6 py-3 w-[20%] text-center">Action</th>
                     </tr>
                 </thead>
@@ -79,7 +79,19 @@
                             <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap text-center">{{ $phone->firstItem()+$key }}</th>
                             <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap">{{ $item->brand }}</th>
                             <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap">{{ $item->model }}</th>
-                            <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap text-right">{{ $item->stock }} Pcs</th>
+                            <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap text-right">
+                                @if ($item->stock == 0)
+                                    <h5 class="bg-gray-100 px-2 py-1 rounded text-center font-bold text-xs text-gray-400">Out Of Stock</h5>
+                                @elseif ($item->stock <= 3)
+                                    <h5 class="bg-red-100 px-2 py-1 rounded text-center font-bold text-xs text-red-400">{{ $item->stock }} Pcs</h5>
+                                @elseif($item->stock <= 5)
+                                    <h5 class="bg-yellow-100 px-2 py-1 rounded text-center font-bold text-xs text-yellow-500">{{ $item->stock }} Pcs</h5>
+                                @elseif($item->stock <= 10)
+                                    <h5 class="bg-green-100 px-2 py-1 rounded text-center font-bold text-xs text-green-500">{{ $item->stock }} Pcs</h5>
+                                @else
+                                    <h5 class="bg-blue-100 px-2 py-1 rounded text-center font-bold text-xs text-blue-500">{{ $item->stock }} Pcs</h5>
+                                @endif    
+                            </th>
                             <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap text-right">Rp. {{ number_format($item->price, 0, ',', '.'); }}</th>  
                             <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap flex justify-center gap-2">
                                 <a href="{{ url('phone/restore/'.$item->id) }}"  class="border-2 border-pink-500 bg-pink-500 px-4 py-2 text-white hover:bg-pink-600 rounded-lg">Restore</a>

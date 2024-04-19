@@ -34,7 +34,7 @@
 
                 <div x-data="{ showModal: false, itemId: null }">
                     <!-- Tombol Hapus -->
-                    <button @click="showModal = true" class="border-2 border-pink-500 px-4 py-2 text-pink-500 rounded-lg hover:bg-pink-600 hover:text-white">Delete</button>
+                    <button @click="showModal = true" class="border-2 border-pink-500 px-4 py-2 text-pink-500 rounded-lg hover:bg-pink-600 hover:text-white">Delete All</button>
                 
                     <!-- Modal Konfirmasi Hapus -->
                     <div x-show="showModal" class="fixed inset-0 z-50 overflow-auto bg-black bg-opacity-50 flex items-center justify-center">
@@ -65,10 +65,12 @@
                 <thead class="text-xs text-black uppercase bg-white">
                     <tr>
                         <th scope="col" class="px-6 py-3 w-[5%] text-center">No</th>
-                        <th scope="col" class="px-6 py-3 w-[25%]">Username</th>
-                        <th scope="col" class="px-6 py-3 w-[25%]">Phone Model</th>
-                        <th scope="col" class="px-6 py-3 w-[5%]">Quantity</th>
-                        <th scope="col" class="px-6 py-3 w-[20%] whitespace-nowrap">Total Amount</th>
+                        <th scope="col" class="px-6 py-3 w-[10%]">Order Date</th>
+                        <th scope="col" class="px-6 py-3 w-[15%]">Username</th>
+                        <th scope="col" class="px-6 py-3 w-[15%]">Phone Model</th>
+                        <th scope="col" class="px-6 py-3 w-[10%]">Price</th>
+                        <th scope="col" class="px-6 py-3 w-[10%] text-center">Quantity</th>
+                        <th scope="col" class="px-6 py-3 w-[10%] whitespace-nowrap">Total Amount</th>
                         <th scope="col" class="px-6 py-3 w-[20%] text-center">Action</th>
                     </tr>
                 </thead>
@@ -77,9 +79,11 @@
                     @foreach ($order as $key => $item)
                         <tr class="bg-white border-b">
                             <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap text-center">{{ $loop->iteration }}</th>
+                            <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap">{{\Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</th>
                             <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap">{{ $item->username }}</th>
                             <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap">{{ $item->brand }} {{ $item->model }}</th>
-                            <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap text-right">{{ $item->quantity }} Pcs</th>
+                            <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap">Rp. {{ number_format($item->price, 0, ',','.') }}</th>
+                            <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap text-center">{{ $item->quantity }} Pcs</th>
                             <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap">Rp. {{number_format($item->totalamount, 0, ',', '.')}}</th>
                             <th scope="row" class="px-6 py-2 font-medium text-black whitespace-nowrap flex justify-center gap-2">
                                 <a href="{{ url('order/restore/'.$item->order_id) }}"  class="border-2 border-pink-500 bg-pink-500 px-4 py-2 text-white hover:bg-pink-600 rounded-lg">Restore</a>

@@ -23,10 +23,18 @@
             @enderror
             </div>
 
+            <label for="phone" class="mt-1">Phone Number</label>
+            <input type="text" id="phone" name="phone" value="{{ old('phone', $user->phone) }}" placeholder="Phone" class="px-3 py-1 focus:outline-none border-2 border-pink-300 focus:border-2 focus:border-pink-500 rounded-full mt-1" autocomplete="off">
+            <div class="error bg-red-30 h-6 mt-1">
+            @error('phone')
+                <div class="error-msg text-xs mt-1 text-red-700 font-semibold">{{ $message }}</div>
+            @enderror
+            </div>
+
             <input type="text" name="password" id="password" value="123" hidden>
             <input type="text" name="role" id="role" value="2" hidden>
 
-            <button type="submit" name="submit" class="px-2 py-2 rounded-full bg-pink-500 text-white mt-8 mb-4">Submit</button>
+            <button type="submit" name="submit" class="px-2 py-2 rounded-lg bg-pink-500 hover:bg-pink-600 text-white mt-8 mb-4">Submit</button>
         </form>
     </div>
 </body>

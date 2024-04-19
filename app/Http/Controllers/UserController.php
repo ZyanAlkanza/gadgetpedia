@@ -43,16 +43,19 @@ class UserController extends Controller
         $request->validate([
             'username' => 'required',
             'email' => 'required',
+            'phone' => 'required',
         ],
         [
             'username.required' => 'Username is required',
-            'email.required' => 'Email is required'
+            'email.required' => 'Email is required',
+            'phone.required' => 'Phone Number is required',
         ]    
     );
 
         $request = User::create([
             'username' => $request->username,
             'email' => $request->email,
+            'phone' => $request->phone,
             'password' => $request->password,
             'role' => $request->role,
         ]);
@@ -85,15 +88,18 @@ class UserController extends Controller
         $request->validate([
             'username' => 'required',
             'email' => 'required',
+            'phone' => 'required',
         ],
         [
             'username.required' => 'Username is required',
-            'email.required' => 'Email is required'
+            'email.required' => 'Email is required',
+            'phone.required' => 'Phone Number is required'
         ]);
 
         $request = User::where('id', $id)->update([
             'username' => $request->username,
             'email' => $request->email,
+            'phone' => $request->phone,
         ]);
 
         return redirect('user')->with('status', 'Data Updated Successfully');
