@@ -63,7 +63,13 @@
                 <h5 class="text-base font-bold">Detail Product</h5>
                 <h1 class="text-xl font-medium mt-4">{{ $phone->brand }} {{ $phone->model }}</h1>
                 <h1 class="text-2xl font-bold mt-2 text-primary">Rp. {{ number_format($phone->price, 0,',','.') }}</h1>
-                <h5 class="text-sm font-light mt-2">Stock: {{ $phone->stock }} Pcs</h5>
+                <h5 class="text-sm font-light mt-2">
+                    @if ($phone->stock == 0)
+                        <div class="w-fit bg-gray-200 px-4 py-1 font-bold text-xs text-gray-500 rounded">Out Of Stock</div>
+                    @else
+                        Stock: {{ $phone->stock }} Pcs
+                    @endif
+                </h5>
                 
                 <div class="badge flex gap-2 mt-4">
                     <div class="badge-1 flex p-2 rounded-lg bg-pink-100">
@@ -91,14 +97,15 @@
 
                 <form action="{{ url('addtocart') }}" method="POST">
                     <div class="button mt-4">
-                        <a href="{{ url('buynow/'. $phone->id) }}" class="bg-primary px-4 py-2 rounded text-white hover:bg-pink-500 transition duration-300 ease-in-out">Buy Now</a>
-                        
+                        @if (!$phone->stock == 0)
+                            <a href="{{ url('buynow/'. $phone->id) }}" class="border-2 border-primary bg-primary px-4 py-2 rounded text-white hover:bg-pink-500 transition duration-300 ease-in-out">Buy Now</a>
                         @csrf
-                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                        {{-- <input type="hidden" name="user_id" value="{{ Auth::user()->id }}"> --}}
                         <input type="hidden" name="phone_id" value="{{ $phone->id }}">
                     
                         <button type="submit" class="bg-pink-100 px-4 py-2 rounded text-primary hover:bg-pink-500 hover:text-white transition duration-300 ease-in-out">Add To Cart</button>
                         {{-- <a href="{{ url('') }}" class="bg-pink-100 px-4 py-2 rounded text-primary hover:bg-pink-500 hover:text-white transition duration-300 ease-in-out">Add To Cart</a> --}}
+                        @endif
                     </div>
                 </form>
             </div>

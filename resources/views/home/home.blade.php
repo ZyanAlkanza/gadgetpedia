@@ -113,7 +113,13 @@
                     <div class="title h-[106px] bg-white rounded p-3 mb-4">
                         <h5 class="text-xs font-semibold font-inter">{{ $item->brand }}</h5>
                         <h1 class="text-base font-inter mt-1 truncate">{{ $item->model }}</h1>
-                        <h1 class="text-base font-bold font-inter text-primary mt-2.5">Rp. {{ number_format($item->price, 0, ',','.') }}</h1>
+                        <h1 class="text-base font-bold font-inter text-primary mt-2.5">
+                            @if ($item->stock == 0)
+                                Out Of Stock
+                            @else
+                                Rp. {{ number_format($item->price, 0, ',','.') }}
+                            @endif
+                        </h1>
                     </div>
                 </div>
             </a>

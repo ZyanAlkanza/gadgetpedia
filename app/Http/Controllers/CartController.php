@@ -16,10 +16,10 @@ class CartController extends Controller
     
     public function addtocart(Request $request){
         
-        $userId = $request->input('user_id');
+        // $userId = $request->input('user_id');
         $phoneId = $request->input('phone_id');
 
-        $existingEntry = Cart::where('user_id', $userId)
+        $existingEntry = Cart::where('user_id', Auth::user()->id)
                                 ->where('phone_id', $phoneId)
                                 ->first();
 
@@ -28,7 +28,7 @@ class CartController extends Controller
         }
 
         Cart::create([
-            'user_id' => $request->user_id,
+            'user_id' => Auth::user()->id,
             'phone_id' => $request->phone_id,
             'quantity' => 1,
         ]);
